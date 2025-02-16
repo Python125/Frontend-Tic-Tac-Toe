@@ -11,7 +11,7 @@ function App() {
 
   return (
     <div>
-      <Text color='white'>Login Page</Text>
+      <Text color='white' fontSize='2xl' fontWeight='bold' marginBottom='1rem'>Login Page</Text>
       <input type="text" placeholder="Enter username" />
       <input type="password" placeholder="Enter password" />
       <Button>Login</Button>
