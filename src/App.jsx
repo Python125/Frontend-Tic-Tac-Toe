@@ -9,6 +9,7 @@ function App() {
   const [users, setUsers] = useState([]);
   const [userInput, setUserInput] = useState('');
   const [walletAddress, setWalletAddress] = useState('');
+  
   useEffect(() => {
     const fetchUsers = async () => {
       const response = await axios.get(`${apiURL}/users`);
