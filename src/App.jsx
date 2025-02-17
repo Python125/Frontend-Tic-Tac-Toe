@@ -1,6 +1,6 @@
-import {React, useState, useEffect } from 'react';
+import { useState, React, useEffect } from 'react';
 import axios from 'axios';
-import { Text, Button, Link, Box } from '@chakra-ui/react';
+import { Text, Button, Input, Link, Box } from '@chakra-ui/react';
 
 const apiURL = import.meta.env.VITE_API_URL;
 console.log(`API URL: ${apiURL}`);
@@ -47,11 +47,11 @@ function App() {
 
   return (
     <Box>
-      <Text color='white' fontSize='2xl' fontWeight='bold' marginBottom='1rem'>Login to your account</Text>
+      <Text color='black' fontSize='2xl' fontWeight='bold' marginBottom='1rem'>Login to your account</Text>
       <form onSubmit={submitUser}>
-        <input type="text" placeholder="Enter username" onChange={addUser} value={userInput} />
-        <input type="password" placeholder="Enter password" onChange={addPassword} value={passwordInput} />
-        <Button type='submit' onClick={submitUser}>Login</Button>
+        <Input type="text" width='200px' placeholder="Enter username" onChange={addUser} value={userInput} />
+        <Input type="password" width='200px' placeholder="Enter password" onChange={addPassword} value={passwordInput} />
+        <Button type='submit' marginLeft='5px' marginBottom='5px' width='70px' fontWeight='bold' onClick={submitUser}>Login</Button>
         <Text fontWeight='bold' fontSize='xl' marginTop='0.5rem' color='white'>Find your username below</Text>
       </form>
       <ul>

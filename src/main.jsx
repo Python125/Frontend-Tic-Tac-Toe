@@ -14,7 +14,7 @@ createRoot(document.getElementById('root')).render(
   <StrictMode>
     <Provider>
       <BrowserRouter>
-        <div style={{ backgroundColor: 'black', height: '100vh', textAlign: 'center' }}>
+        <div style={{ backgroundColor: 'white', height: '100vh', textAlign: 'center' }}>
           <Routes>
             <Route path="/" element={<App />} />
             <Route path="/user/:userId" element={<User />} />
