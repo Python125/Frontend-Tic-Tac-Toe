@@ -52,7 +52,7 @@ function TicTacToe({ userId }) {
         {games.map(game => {
           return (
             <li key={game.id}>
-              <Link variant='plain' _hover={{textDecoration: 'underline', color: 'blue.600'}} href={`/games/${game.id}`} color='white'>{game.name}</Link>
+              <Link variant='plain' _hover={{textDecoration: 'underline', color: 'blue.600'}} href={`/games/${game.id}`} color='black'>{game.name}</Link>
             </li>
           )
         })}
