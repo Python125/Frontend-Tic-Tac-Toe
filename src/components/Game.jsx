@@ -7,11 +7,13 @@ const apiURL = import.meta.env.VITE_API_URL;
 function Game({ userId }) {
   const [games, setGames] = useState([]);
   const [gameInput, setGameInput] = useState('');
+  const [username, setUsername] = useState('');
 
   useEffect(() => {
     const fetchGames = async () => {
       const response = await axios.get(`${apiURL}/users/${userId}/games`);
       setGames(response.data);
+      setUsername(response.data.username);
     }
     fetchGames();
   }, [userId]);
@@ -42,11 +44,11 @@ function Game({ userId }) {
     })
   }
 
-  const joinGame = (gameId) => {}
+  // const joinGame = (gameId) => {}
 
   return (
     <Box>
-      <Text color='black' fontSize='2xl' fontWeight='bold' marginBottom='1rem'>Games</Text>
+      <Text fontWeight='bold' fontSize='2xl'>Welcome {username}</Text>
       <form onSubmit={submitGame}>
         <Input type="text" width='200px' placeholder="Enter game name" onChange={addGame} value={gameInput} />
         {/* <Button type='submit' marginLeft='5px' marginBottom='5px' width='85px' fontWeight='bold' onClick={submitGame}>Join Game</Button> */}
