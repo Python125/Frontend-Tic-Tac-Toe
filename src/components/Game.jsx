@@ -1,5 +1,5 @@
 import { useState, React, useEffect } from "react";
-import { Text, Button, Box } from '@chakra-ui/react';
+import { Text, Button, Box, Link } from '@chakra-ui/react';
 
 const apiURL = import.meta.env.VITE_API_URL;
 
@@ -9,7 +9,7 @@ function Game({ userId }) {
 
   useEffect(() => {
     const fetchGames = async () => {
-      const response = await axios.get(`${apiURL}/users/${userId}/games`);
+      const response = await axios.get(`${apiURL}/users/${userId}`);
       setGames(response.data);
     }
     fetchGames();
@@ -37,7 +37,7 @@ function Game({ userId }) {
 
     axios.post(`${apiURL}/users/${userId}/games`, newGame).then(response => {
       setGames([...games, response.data]);
-      setGameInput('');     
+      setGameInput('');
     })
   }
 
@@ -47,11 +47,14 @@ function Game({ userId }) {
       <form onSubmit={submitGame}>
         <Input type="text" width='200px' placeholder="Enter game name" onChange={addGame} value={gameInput} />
         <Button type='submit' marginLeft='5px' marginBottom='5px' width='70px' fontWeight='bold' onClick={submitGame}>Join Game</Button>
+        <Text fontWeight='bold' fontSize='xl' marginTop='0.5rem' color='black'>Join a game below</Text>
       </form>
       <ul>
         {games.map(game => {
           return (
-            <h1>Hello</h1>
+            <li key={game.id}>
+              <Link variant='plain' _hover={{textDecoration: 'underline', color: 'blue.600'}} href={`/user/${userId}/games/${game.id}`} color='black'>{game.name}</Link>
+            </li>
           )
         })}
       </ul>
