@@ -1,5 +1,5 @@
 import { useState, React, useEffect } from "react";
-// import axios from "axios";
+//import axios from "axios";
 import { Text, Button, Box, Link, Input } from '@chakra-ui/react';
 
 const apiURL = import.meta.env.VITE_API_URL;
@@ -54,7 +54,7 @@ function Game({ userId }) {
         {games.map(game => {
           return (
             <li key={game.id}>
-              <Link variant='plain' _hover={{textDecoration: 'underline', color: 'blue.600'}} href={`/user/${userId}/games/`} color='black'>{game.name}</Link>
+              <Link variant='plain' _hover={{textDecoration: 'underline', color: 'blue.600'}} href={`/users/${userId}/games/${game.id}`} color='black'>{game.name}</Link>
             </li>
           )
         })}
