@@ -3,11 +3,11 @@ import { createRoot } from 'react-dom/client';
 import { BrowserRouter, Routes, Route, useParams } from 'react-router';
 import { Provider } from './components/ui/provider';
 import App from './App';
-import TicTacToe from './components/ticTacToe';
+import Game from './components/Game';
 
 function User() {
   const { userId } = useParams();
-  return (<TicTacToe userId={userId} />)
+  return (<Game userId={userId} />)
 }
 
 createRoot(document.getElementById('root')).render(

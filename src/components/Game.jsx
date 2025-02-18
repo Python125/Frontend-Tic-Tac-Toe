@@ -1,9 +1,9 @@
-import { useState, useEffect } from "react";
-import { Text, Button, Link, Box } from '@chakra-ui/react';
+import { useState, React, useEffect } from "react";
+import { Text, Button, Box } from '@chakra-ui/react';
 
 const apiURL = import.meta.env.VITE_API_URL;
 
-function TicTacToe({ userId }) {
+function Game({ userId }) {
   const [games, setGames] = useState([]);
   const [gameInput, setGameInput] = useState('');
 
@@ -51,9 +51,7 @@ function TicTacToe({ userId }) {
       <ul>
         {games.map(game => {
           return (
-            <li key={game.id}>
-              <Link variant='plain' _hover={{textDecoration: 'underline', color: 'blue.600'}} href={`/games/${game.id}`} color='black'>{game.name}</Link>
-            </li>
+            <h1>Hello</h1>
           )
         })}
       </ul>
@@ -61,4 +59,4 @@ function TicTacToe({ userId }) {
   )
 }
 
-export default TicTacToe;
+export default Game;
