@@ -58,7 +58,7 @@ function App() {
         {users.map(user => {
           return (
             <li key={user.id}>
-              <Link variant='plain' _hover={{textDecoration: 'underline', color: 'blue.600'}} href={`/user/${user.id}`} color='black'>{user.username}</Link>
+              <Link variant='plain' _hover={{textDecoration: 'underline', color: 'blue.600'}} href={`/${user.id}`} color='black'>{user.username}</Link>
             </li>
           )
         })}
