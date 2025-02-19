@@ -11,9 +11,10 @@ function Game({ userId }) {
 
   useEffect(() => {
     const fetchGames = async () => {
-      const response = await axios.get(`${apiURL}/users/${userId}/games`);
-      setGames(response.data);
-      setUsername(response.data.username);
+      const response = await axios.get(`${apiURL}/users/${userId}`);
+      const gamesData = Array.isArray(response.data) ? response.data : [];
+      setGames(gamesData);
+      setUsername(response.data.username || '');
     }
     fetchGames();
   }, [userId]);
@@ -44,24 +45,22 @@ function Game({ userId }) {
     })
   }
 
-  // const joinGame = (gameId) => {}
-
   return (
     <Box>
-      <Text fontWeight='bold' fontSize='2xl'>Welcome {username}</Text>
+      <Text fontWeight='bold' fontSize='2xl'>Games</Text>
       <form onSubmit={submitGame}>
         <Input type="text" width='200px' placeholder="Enter game name" onChange={addGame} value={gameInput} />
         {/* <Button type='submit' marginLeft='5px' marginBottom='5px' width='85px' fontWeight='bold' onClick={submitGame}>Join Game</Button> */}
         <Text fontWeight='bold' fontSize='xl' marginTop='0.5rem' color='black'>Join a game below</Text>
       </form>
       <ul>
-        {/* {joinGame.map(game => {
+        {games.map(game => {
           return (
             <li key={game.id}>
-              <Link variant='plain' _hover={{textDecoration: 'underline', color: 'blue.600'}} href={`/users/${userId}/games/${game.id}`} color='black'>{game.name}</Link>
+              <Text variant='plain' _hover={{textDecoration: 'underline', color: 'blue.600'}} href={`/users/${userId}/games/${game.id}`} color='black'>{game.name}</Text>
             </li>
           )
-        })} */}
+        })}
       </ul>
     </Box>
   )
