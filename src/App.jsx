@@ -8,7 +8,7 @@ console.log(`API URL: ${apiURL}`);
 function App() {
   const [users, setUsers] = useState([]);
   const [userInput, setUserInput] = useState('');
-  const [passwordInput, setPasswordInput] = useState('');
+  const [walletAddress, setWalletAddress] = useState('');
   
   useEffect(() => {
     const fetchUsers = async () => {
@@ -22,8 +22,8 @@ function App() {
     setUserInput(e.target.value);
   }
 
-  function addPassword(e) {
-    setPasswordInput(e.target.value);
+  function addWalletAddress(e) {
+    setWalletAddress(e.target.value);
   }
 
   function submitUser(e) {
@@ -33,7 +33,7 @@ function App() {
     const newUser = {
       id: users.length + 1,
       username: userInput,
-      password: passwordInput,
+      walletAddress: walletAddress,
       games: [],
     }
     console.log(newUser);
@@ -41,7 +41,7 @@ function App() {
     axios.post(`${apiURL}/users`, newUser).then(response => {
       setUsers([...users, response.data]);
       setUserInput('');
-      setPasswordInput('');
+      setWalletAddress('');
     })
   }
 
@@ -50,7 +50,7 @@ function App() {
       <Text color='black' fontSize='2xl' fontWeight='bold' marginBottom='1rem'>Login to your account</Text>
       <form onSubmit={submitUser}>
         <Input type="text" width='200px' placeholder="Enter username" value={userInput} onChange={addUser} />
-        <Input type="password" width='200px' placeholder="Enter password" value={passwordInput} onChange={addPassword} />
+        <Input type="text" width='200px' placeholder="Enter wallet address" value={walletAddress} onChange={addWalletAddress} />
         <Button type='submit' marginLeft='5px' marginBottom='5px' width='70px' fontWeight='bold' onClick={submitUser}>Login</Button>
         <Text fontWeight='bold' fontSize='xl' marginTop='0.5rem' color='black'>Find your username below</Text>
       </form>
