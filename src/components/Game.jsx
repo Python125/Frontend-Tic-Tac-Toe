@@ -1,6 +1,6 @@
 import { useState, React, useEffect } from "react";
 import axios from "axios";
-import { Text, Button, Box, Link, Input } from '@chakra-ui/react';
+import { Text, Box, Link, Input } from '@chakra-ui/react';
 
 const apiURL = import.meta.env.VITE_URL;
 // console.log('API URL:', apiURL);
@@ -51,14 +51,13 @@ function Game({ userId }) {
       <Text fontWeight='bold' fontSize='2xl'>Games</Text>
       <form onSubmit={submitGame}>
         <Input type="text" width='200px' placeholder="Enter game name" onChange={addGame} value={gameInput} />
-        {/* <Button type='submit' marginLeft='5px' marginBottom='5px' width='85px' fontWeight='bold' onClick={submitGame}>Join Game</Button> */}
         <Text fontWeight='bold' fontSize='xl' marginTop='0.5rem' color='black'>Join a game below</Text>
       </form>
       <ul>
         {games.map(game => {
           return (
             <li key={game.id}>
-              <Text variant='plain' _hover={{textDecoration: 'underline', color: 'blue.600'}} href={`/${game.id}`} color='black'>{game.name}</Text>
+              <Link variant='plain' _hover={{textDecoration: 'underline', color: 'blue.600'}} href={`/${game.id}`} color='black'>{game.name}</Link>
             </li>
           )
         })}
