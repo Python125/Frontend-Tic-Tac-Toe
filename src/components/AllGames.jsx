@@ -31,11 +31,11 @@ function GameList({ userId }) {
     const newGame = {
       id: games.length + 1,
       name: gameInput,
-      maxParticipantCount: 5,
+      maxParticipantCount: 2,
       minBuyInAmount: 0,
       maxBuyInAmount: 0,
       status: 'Active',
-      userId: 5,
+      userId: userId,
     }
     console.log(newGame);
 
