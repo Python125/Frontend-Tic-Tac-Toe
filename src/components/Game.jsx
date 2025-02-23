@@ -2,7 +2,8 @@ import { useState, React, useEffect } from "react";
 import axios from "axios";
 import { Text, Button, Box, Link, Input } from '@chakra-ui/react';
 
-const apiURL = import.meta.env.VITE_API_URL;
+const apiURL = import.meta.env.VITE_URL;
+// console.log('API URL:', apiURL);
 
 function Game({ userId }) {
   const [games, setGames] = useState([]);
@@ -11,7 +12,7 @@ function Game({ userId }) {
 
   useEffect(() => {
     const fetchGames = async () => {
-      const response = await axios.get(`${apiURL}/users/${userId}`);
+      const response = await axios.get(`${apiURL}/games`);
       const gamesData = Array.isArray(response.data) ? response.data : [];
       setGames(gamesData);
       setUsername(response.data.username || '');
@@ -39,7 +40,7 @@ function Game({ userId }) {
     }
     console.log(newGame);
 
-    axios.post(`${apiURL}/users/${userId}/games`, newGame).then(response => {
+    axios.post(`${apiURL}/games`, newGame).then(response => {
       setGames([...games, response.data]);
       setGameInput('');
     })
@@ -57,7 +58,7 @@ function Game({ userId }) {
         {games.map(game => {
           return (
             <li key={game.id}>
-              <Text variant='plain' _hover={{textDecoration: 'underline', color: 'blue.600'}} href={`/users/${userId}/games/${game.id}`} color='black'>{game.name}</Text>
+              <Text variant='plain' _hover={{textDecoration: 'underline', color: 'blue.600'}} href={`/${game.id}`} color='black'>{game.name}</Text>
             </li>
           )
         })}
