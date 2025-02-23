@@ -5,7 +5,7 @@ import { Text, Box, Link, Input } from '@chakra-ui/react';
 const apiURL = import.meta.env.VITE_URL;
 // console.log('API URL:', apiURL);
 
-function Game({ userId }) {
+function GameList({ userId }) {
   const [games, setGames] = useState([]);
   const [gameInput, setGameInput] = useState('');
   const [username, setUsername] = useState('');
@@ -31,12 +31,11 @@ function Game({ userId }) {
     const newGame = {
       id: games.length + 1,
       name: gameInput,
-      maxParticipantCount: [],
+      maxParticipantCount: 5,
       minBuyInAmount: 0,
       maxBuyInAmount: 0,
       status: 'Active',
-      userId: userId,
-      seats: [],
+      userId: 5,
     }
     console.log(newGame);
 
@@ -66,4 +65,4 @@ function Game({ userId }) {
   )
 }
 
-export default Game;
+export default GameList;
