@@ -3,7 +3,7 @@ import axios from 'axios';
 import { Text, Button, Input, Link, Box } from '@chakra-ui/react';
 
 const apiURL = import.meta.env.VITE_URL;
-console.log(`API URL: ${apiURL}`);
+// console.log(`API URL: ${apiURL}`);
 
 function App() {
   const [users, setUsers] = useState([]);

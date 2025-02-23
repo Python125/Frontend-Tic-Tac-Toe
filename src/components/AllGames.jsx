@@ -56,7 +56,7 @@ function GameList({ userId }) {
         {games.map(game => {
           return (
             <li key={game.id}>
-              <Link variant='plain' _hover={{textDecoration: 'underline', color: 'blue.600'}} href={`/${userId}/${game.id}`} color='black'>{game.name}</Link>
+              <Link variant='plain' _hover={{textDecoration: 'underline', color: 'blue.600'}} href={`/${userId}/games/${game.id}`} color='black'>{game.name}</Link>
             </li>
           )
         })}

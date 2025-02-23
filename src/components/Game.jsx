@@ -3,15 +3,15 @@ import axios from "axios";
 import { Text, Button, Box, Link, Input } from '@chakra-ui/react';
 
 const apiURL = import.meta.env.VITE_URL;
-// console.log('API URL:', apiURL);
+console.log('API URL:', apiURL);
 
 
 function Game({ gameId }) {
-    const [game, setGame] = useState(null);
+    const [game, setGame] = useState('');
 
     useEffect(() => {
         const fetchGame = async () => {
-            const response = await axios.get(`${apiURL}/${gameId}`);
+            const response = await axios.get(`${apiURL}/games/${gameId}`);
             setGame(response.data);
         }
         fetchGame();
