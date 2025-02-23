@@ -5,7 +5,6 @@ import { Text, Button, Box, Link, Input } from '@chakra-ui/react';
 const apiURL = import.meta.env.VITE_URL;
 console.log('API URL:', apiURL);
 
-
 function Game({ gameId }) {
     const [game, setGame] = useState('');
 
