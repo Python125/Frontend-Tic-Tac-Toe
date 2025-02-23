@@ -4,16 +4,12 @@ import { BrowserRouter, Routes, Route, useParams } from 'react-router';
 import { Provider } from './components/ui/provider';
 import App from './App';
 import AllGames from './components/AllGames';
+import Game from './components/Game';
 
 function User() {
   const { userId } = useParams();
   return (<AllGames userId={userId} />)
 }
-
-// function GameList() {
-//   const { userId } = useParams();
-//   return (<AllGames userId={userId} />)
-// }
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
@@ -23,7 +19,7 @@ createRoot(document.getElementById('root')).render(
           <Routes>
             <Route path="/" element={<App />} />
             <Route path="/:userId" element={<User />} />
-            {/* <Route path="/:userId/games" element={<AllGames />} /> */}
+            <Route path="/:userId/:gameId" element={<Game />} />
           </Routes>
         </div>
       </BrowserRouter>
