@@ -27,6 +27,10 @@ function Game({ gameId }) {
             setPlayer2('X');
         }
     }
+    
+    const handleClick = (e) => {
+        e.preventDefault();
+    }
 
     return (
         <Box>
