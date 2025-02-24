@@ -5,20 +5,11 @@ import { Text, Button, Box, Link, Input } from '@chakra-ui/react';
 const apiURL = import.meta.env.VITE_URL;
 console.log('API URL:', apiURL);
 
-function Game({ gameId }) {
-    const [game, setGame] = useState('');
-
-    useEffect(() => {
-        const fetchGame = async () => {
-            const response = await axios.get(`${apiURL}/games/${gameId}`);
-            setGame(response.data);
-        }
-        fetchGame();
-    }, [gameId]);
+function Game() {
 
     return (
         <Box>
-            <Text fontSize="2xl" fontWeight="bold">Welcome to game session</Text>
+            <Text fontSize="2xl" fontWeight="bold">Welcome to your game session</Text>
         </Box>
     )
 }
