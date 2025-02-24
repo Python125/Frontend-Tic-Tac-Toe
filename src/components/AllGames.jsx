@@ -47,21 +47,19 @@ function GameList({ userId }) {
 
   return (
     <Box>
-      <Text fontWeight='bold' fontSize='2xl'>Games</Text>
+      <Text fontWeight='bold' fontSize='2xl'>Join a game below</Text>
       <form onSubmit={submitGame}>
-        <Input type="text" width='200px' placeholder="Enter game name" onChange={addGame} value={gameInput} />
-        <Text fontWeight='bold' fontSize='xl' marginTop='0.5rem' color='black'>Join a game below</Text>
+        {/* <Input type="text" width='200px' placeholder="Enter game name" onChange={addGame} value={gameInput} /> */}
       </form>
       <ul>
         {games.map(game => {
           return (
             <li key={game.id}>
-              <Link variant='plain' _hover={{textDecoration: 'underline', color: 'blue.600'}} href={`/${userId}/games/${game.id}`} color='black'>{game.name}</Link>
+              <Link variant='plain' _hover={{textDecoration: 'underline', color: 'blue.600'}} href={`/games/${game.id}`} color='black'>{game.name}</Link>
             </li>
           )
         })}
       </ul>
-      <Link variant='plain' _hover={{textDecoration: 'underline', color: 'blue.600'}} href={`/`} color='black'>Back</Link>
     </Box>
   )
 }
