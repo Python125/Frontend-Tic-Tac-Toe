@@ -32,9 +32,9 @@ function Game({ gameId }) {
         <Box>
             <Text fontWeight='bold' fontSize='2xl'>Welcome to your game session</Text>
             <form onSubmit={choosePlayer}>
-                <Text fontWeight='bold' fontSize='xl' marginTop='0.5rem' color='black'>Choose your player</Text>
-                <Button type="submit" variant='solid' colorScheme='blue' marginRight='1rem' marginTop='1rem'>Player 1</Button>
-                <Button type="submit" variant='solid' colorScheme='blue' marginRight='1rem' marginTop='1rem'>Player 2</Button>
+                <Text fontWeight='bold' fontSize='xl' marginTop='0.5rem' color='black'>Choose a player</Text>
+                <Button type="submit" variant='solid' colorScheme='blue' marginRight='1rem' marginTop='1rem'>X</Button>
+                <Button type="submit" variant='solid' colorScheme='blue' marginRight='1rem' marginTop='1rem'>O</Button>
             </form>
         </Box>
     )
