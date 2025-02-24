@@ -18,7 +18,7 @@ function Game({ gameId }) {
         fetchGameSession();
     }, [gameId]);
 
-    function choosePlayer() {
+    function randomPlayer() {
         if (player1 === 'X') {
             setPlayer1('X');
             setPlayer2('O');
@@ -35,11 +35,11 @@ function Game({ gameId }) {
     return (
         <Box>
             <Text fontWeight='bold' fontSize='2xl'>Welcome to your game session</Text>
-            <form onSubmit={choosePlayer}>
+            {/* <form onSubmit={choosePlayer}>
                 <Text fontWeight='bold' fontSize='xl' marginTop='0.5rem' color='black'>Choose a player</Text>
                 <Button type="submit" variant='solid' colorScheme='blue' marginRight='1rem' marginTop='1rem'>X</Button>
                 <Button type="submit" variant='solid' colorScheme='blue' marginRight='1rem' marginTop='1rem'>O</Button>
-            </form>
+            </form> */}
         </Box>
     )
 }
