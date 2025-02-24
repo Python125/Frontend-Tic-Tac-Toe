@@ -61,6 +61,7 @@ function GameList({ userId }) {
           )
         })}
       </ul>
+      <Link variant='plain' _hover={{textDecoration: 'underline', color: 'blue.600'}} href={`/`} color='black'>Back</Link>
     </Box>
   )
 }

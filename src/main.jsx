@@ -24,7 +24,7 @@ createRoot(document.getElementById('root')).render(
           <Routes>
             <Route path="/" element={<App />} />
             <Route path="/:userId" element={<User />} />
-              <Route path="/:userId/games/:gameId" element={<SingleGame />} />
+            <Route path="/:userId/games/:gameId" element={<SingleGame />} />
           </Routes>
         </div>
       </BrowserRouter>
