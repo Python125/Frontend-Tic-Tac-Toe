@@ -6,7 +6,7 @@ import AllGames from './components/AllGames';
 import Game from './components/Game';
 // import App from './App';
 
-function User() {
+function Games() {
   const { userId } = useParams();
   return (<AllGames userId={userId} />)
 }
@@ -22,7 +22,7 @@ createRoot(document.getElementById('root')).render(
       <BrowserRouter>
         <div style={{ backgroundColor: 'white', height: '100vh', textAlign: 'center' }}>
           <Routes>
-            <Route path="/" element={<User />} />
+            <Route path="/" element={<Games />} />
             <Route path="/games/:gameId" element={<SingleGame />} />
           </Routes>
         </div>
