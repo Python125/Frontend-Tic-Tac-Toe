@@ -47,10 +47,10 @@ function GameList({ userId }) {
 
   return (
     <Box>
-      <Text fontWeight='bold' fontSize='2xl'>Join a game below</Text>
       <form onSubmit={submitGame}>
-        {/* <Input type="text" width='200px' placeholder="Enter game name" onChange={addGame} value={gameInput} /> */}
+        <Input type="text" width='200px' marginBottom='10px' marginTop='10px' placeholder="Enter new game" onChange={addGame} value={gameInput} />
       </form>
+      <Text fontWeight='bold' fontSize='2xl'>Join a game below</Text>
       <ul>
         {games.map(game => {
           return (
