@@ -3,7 +3,7 @@ import { createRoot } from 'react-dom/client';
 import { BrowserRouter, Routes, Route, useParams } from 'react-router';
 import { Provider } from './components/ui/provider';
 import AllGames from './components/AllGames';
-import SetupGame from './components/SetupGame';
+import SetupGame from './components/Game';
 // import App from './App';
 
 function GameList() {

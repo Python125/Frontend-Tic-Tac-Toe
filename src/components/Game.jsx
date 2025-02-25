@@ -6,32 +6,29 @@ const apiURL = import.meta.env.VITE_URL;
 console.log('API URL:', apiURL);
 
 function Game({ gameId }) {
-    const [gameSession, setGameSession] = useState([]);
-    const [player1, setPlayer1] = useState('');
-    const [player2, setPlayer2] = useState('');
+    const [game, setGame] = useState(null);
+    const [players, setPlayers] = useState([]);
+    const [currentPlayer, setCurrentPlayer] = useState('');
 
     useEffect(() => {
-        const fetchGameSession = async () => {
+        const fetchGame = async () => {
             const response = await axios.get(`${apiURL}/games/${gameId}`);
-            setGameSession(response.data);
+            setGame(response.data);
         }
-        fetchGameSession();
+        fetchGame();
     }, [gameId]);
-
+    
     const randomPlayer = (e) => {
         e.preventDefault();
         const randomPlayer = Math.random();
         if (randomPlayer === 0) {
-            setPlayer1('X');
-            setPlayer2('O');
+            setCurrentPlayer('X');
         } else if (randomPlayer === 1) {
-            setPlayer1('O');
-            setPlayer2('X');
+            setCurrentPlayer('O');
         }
 
         axios.post(`${apiURL}/games/${gameId}`, {
-            setPlayer1: player1,
-            setPlayer2: player2,
+            setCurrentPlayer: currentPlayer,
         })
     }
 
