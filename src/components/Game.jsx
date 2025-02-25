@@ -18,19 +18,21 @@ function Game({ gameId }) {
         fetchGameSession();
     }, [gameId]);
 
-    // function randomPlayer() {
-    //     if (player1 === 'X') {
-    //         setPlayer1('X');
-    //         setPlayer2('O');
-    //     } else if (player1 === 'O') {
-    //         setPlayer1('O');
-    //         setPlayer2('X');
-    //     }
-    // }
-
-    const startGame = (e) => {
+    function randomPlayer(e) {
         e.preventDefault();
+        const randomPlayer = Math.random();
+        if (randomPlayer === 0) {
+            setPlayer1('X');
+            setPlayer2('O');
+        } else if (randomPlayer === 1) {
+            setPlayer1('O');
+            setPlayer2('X');
+        }
     }
+
+    // const startGame = (e) => {
+    //     e.preventDefault();
+    // }
 
     // const handleClick = (e) => {
     //     e.preventDefault();
@@ -39,7 +41,7 @@ function Game({ gameId }) {
     return (
         <Box>
             <Text fontWeight='bold' fontSize='2xl'>Welcome to your game session</Text>
-            <Button type="submit" variant='solid' marginTop='1rem' _hover={{backgroundColor: 'gray.600'}} onClick={startGame}>Start Game</Button>
+            <Button type="submit" variant='solid' marginTop='1rem' _hover={{backgroundColor: 'gray.600'}} onClick={randomPlayer}>Start Game</Button>
             {/* <form onSubmit={randomPlayer}>
                 <Text fontWeight='bold' fontSize='xl' marginTop='0.5rem' color='black'>Choose a player</Text>
                 <Button type="submit" variant='solid' colorScheme='blue' marginRight='1rem' marginTop='1rem'>X</Button>
