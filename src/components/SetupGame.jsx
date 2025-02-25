@@ -18,7 +18,7 @@ function Game({ gameId }) {
         fetchGameSession();
     }, [gameId]);
 
-    function randomPlayer(e) {
+    const randomPlayer = (e) => {
         e.preventDefault();
         const randomPlayer = Math.random();
         if (randomPlayer === 0) {
@@ -28,25 +28,23 @@ function Game({ gameId }) {
             setPlayer1('O');
             setPlayer2('X');
         }
+
+        axios.post(`${apiURL}/games/${gameId}`, {
+            setPlayer1: player1,
+            setPlayer2: player2,
+        })
     }
 
-    // const startGame = (e) => {
-    //     e.preventDefault();
-    // }
-
-    // const handleClick = (e) => {
+    // const placePiece = (e) => {
     //     e.preventDefault();
     // }
 
     return (
         <Box>
-            <Text fontWeight='bold' fontSize='2xl'>Welcome to your game session</Text>
-            <Button type="submit" variant='solid' marginTop='1rem' _hover={{backgroundColor: 'gray.600'}} onClick={randomPlayer}>Start Game</Button>
-            {/* <form onSubmit={randomPlayer}>
-                <Text fontWeight='bold' fontSize='xl' marginTop='0.5rem' color='black'>Choose a player</Text>
-                <Button type="submit" variant='solid' colorScheme='blue' marginRight='1rem' marginTop='1rem'>X</Button>
-                <Button type="submit" variant='solid' colorScheme='blue' marginRight='1rem' marginTop='1rem'>O</Button>
-            </form> */}
+            <form onSubmit={randomPlayer}>
+                <Text fontWeight='bold' fontSize='2xl'>Welcome to your game session</Text>
+                <Button type="submit" variant='solid' href={'/'} marginTop='1rem' _hover={{backgroundColor: 'gray.600'}}>Start Game</Button>
+            </form>
         </Box>
     )
 }
