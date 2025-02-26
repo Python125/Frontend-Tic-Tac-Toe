@@ -52,9 +52,9 @@ function GameList({ userId }) {
       </form>
       <Text fontWeight='bold' fontSize='2xl'>Join a game below</Text>
       <ul>
-        {games.map((game, index) => {
+        {games.map(game => {
           return (
-            <li key={game.id || index}>
+            <li key={game.id}>
               <Link variant='plain' _hover={{textDecoration: 'underline', color: 'blue.600'}} href={`/games/${game.id}`} color='black'>{game.name}</Link>
             </li>
           )
