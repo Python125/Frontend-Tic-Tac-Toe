@@ -56,7 +56,6 @@ function GameList({ userId }) {
           return (
             <li key={game.id || index}>
               <Link variant='plain' _hover={{textDecoration: 'underline', color: 'blue.600'}} href={`/games/${game.id}`} color='black'>{game.name}</Link>
-              {console.log(game)}
             </li>
           )
         })}
