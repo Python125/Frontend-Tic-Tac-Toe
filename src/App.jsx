@@ -59,6 +59,7 @@ function App() {
           return (
             <li key={user.id}>
               <Link variant='plain' _hover={{textDecoration: 'underline', color: 'blue.600'}} href={`/games`} color='black'>{user.username}</Link>
+              {console.log(user)}
             </li>
           )
         })}
