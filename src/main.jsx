@@ -3,7 +3,7 @@ import { createRoot } from 'react-dom/client';
 import { BrowserRouter, Routes, Route, useParams } from 'react-router';
 import { Provider } from './components/ui/provider';
 import AllGames from './components/AllGames';
-import SetupGame from './components/Game';
+import Game from './components/Game';
 // import App from './App';
 
 function GameList() {
@@ -11,9 +11,9 @@ function GameList() {
   return (<AllGames userId={userId} />)
 }
 
-function GameSetup() {
+function SingleGame() {
   const { gameId } = useParams();
-  return (<SetupGame gameId={gameId} />)
+  return (<Game gameId={gameId} />)
 }
 
 createRoot(document.getElementById('root')).render(
@@ -23,7 +23,7 @@ createRoot(document.getElementById('root')).render(
         <div style={{ backgroundColor: 'white', height: '100vh', textAlign: 'center' }}>
           <Routes>
             <Route path="/" element={<GameList />} />
-            <Route path="/games/:gameId" element={<GameSetup />} />
+            <Route path="/games/:gameId" element={<SingleGame />} />
           </Routes>
         </div>
       </BrowserRouter>
