@@ -1,6 +1,12 @@
 import { useState, React, useEffect } from "react";
 import axios from "axios";
 import { Text, Box, Link, Input } from '@chakra-ui/react';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { WagmiProvider, useAccount } from 'wagmi';
+import { config } from '../wagmi.config';
+import { Account } from './account';
+import { WalletOptions } from './wallet-options';
+
 
 const apiURL = import.meta.env.VITE_URL;
 // console.log('API URL:', apiURL);
@@ -44,24 +50,36 @@ function GameList({ userId }) {
       setGameInput('');
     })
   }
-
   console.log('games',games);
+
+  function ConnectWallet() {
+    const { isConnected } = useAccount();
+    if (isConnected) return <Account />;
+    return <WalletOptions />;
+  }
+
+  const queryClient = new QueryClient()
 
   return (
     <Box>
-      <form onSubmit={submitGame}>
-        <Input type="text" width='200px' marginBottom='10px' marginTop='10px' placeholder="Enter new game" onChange={addGame} value={gameInput} />
-      </form>
-      <Text fontWeight='bold' fontSize='2xl'>Join a game below</Text>
-      <ul>
-        {games.map(game => {
-          return (
-            <li key={game.id}>
-              <Link variant='plain' _hover={{textDecoration: 'underline', color: 'blue.600'}} href={`/games/${game.id}`} color='black'>{game.name}</Link>
-            </li>
-          )
-        })}
-      </ul>
+      <WagmiProvider config={config}>
+        <QueryClientProvider client={queryClient}>
+          <ConnectWallet />
+          <form onSubmit={submitGame}>
+            <Input type="text" width='200px' marginBottom='10px' marginTop='10px' placeholder="Enter new game" onChange={addGame} value={gameInput} />
+          </form>
+          <Text fontWeight='bold' fontSize='2xl'>Join a game below</Text>
+          <ul>
+            {games.map(game => {
+              return (
+                <li key={game.id}>
+                  <Link variant='plain' _hover={{textDecoration: 'underline', color: 'blue.600'}} href={`/games/${game.id}`} color='black'>{game.name}</Link>
+                </li>
+              )
+            })}
+          </ul>
+        </QueryClientProvider>
+      </WagmiProvider>
     </Box>
   )
 }
