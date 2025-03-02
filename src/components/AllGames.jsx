@@ -5,7 +5,7 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { WagmiProvider, useAccount } from 'wagmi';
 import { config } from '../wagmi.config';
 import { Account } from './account';
-import { WalletOptions } from './wallet-options';
+import WalletOptions from './wallet-options';
 
 
 const apiURL = import.meta.env.VITE_URL;
@@ -50,7 +50,7 @@ function GameList({ userId }) {
       setGameInput('');
     })
   }
-  console.log('games',games);
+  // console.log('games',games);
 
   function ConnectWallet() {
     const { isConnected } = useAccount();

@@ -1,4 +1,4 @@
-import { Connector, useConnect } from 'wagmi';
+import { useConnect } from 'wagmi';
 import { Button } from '@chakra-ui/react';
 
 function WalletOptions() {
