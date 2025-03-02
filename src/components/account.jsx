@@ -1,4 +1,5 @@
 import { useAccount, useDisconnect, useEnsAvatar, useEnsName } from 'wagmi';
+import { Box, Button } from '@chakra-ui/react';
 
 export function Account() {
     const { address } = useAccount();
