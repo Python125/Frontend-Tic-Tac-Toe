@@ -1,11 +1,11 @@
 import { useState, React, useEffect } from "react";
 import axios from "axios";
 import { Text, Box, Link, Input } from '@chakra-ui/react';
-// import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-// import { WagmiProvider, useAccount } from 'wagmi';
-// import { config } from '../wagmi.config';
-// import { Account } from './account';
-// import WalletOptions from './wallet-options';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { WagmiProvider, useAccount } from 'wagmi';
+import { config } from '../wagmi.config';
+import { Account } from './account';
+import WalletOptions from './wallet-options';
 
 const apiURL = import.meta.env.VITE_URL;
 // console.log('API URL:', apiURL);
@@ -57,13 +57,14 @@ function GameList({ userId }) {
     return <WalletOptions />;
   }
 
-  const queryClient = new QueryClient()
+  const queryClient = new QueryClient();
 
   return (
     <Box>
       <WagmiProvider config={config}>
         <QueryClientProvider client={queryClient}>
           <ConnectWallet />
+
           <form onSubmit={submitGame}>
             <Input type="text" width='200px' marginBottom='10px' marginTop='10px' placeholder="Enter new game" onChange={addGame} value={gameInput} />
           </form>
@@ -77,6 +78,7 @@ function GameList({ userId }) {
               )
             })}
           </ul>
+
         </QueryClientProvider>
       </WagmiProvider>
     </Box>

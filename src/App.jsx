@@ -1,19 +1,15 @@
 import { useState, React, useEffect } from 'react';
 import axios from 'axios';
 import { Text, Button, Input, Link, Box } from '@chakra-ui/react';
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { WagmiProvider, useAccount } from 'wagmi';
-import { config } from './wagmi.config';
-import { Account } from './components/account';
-import WalletOptions from './components/wallet-options';
+import GameList from './components/AllGames';
 
 const apiURL = import.meta.env.VITE_URL;
 // console.log(`API URL: ${apiURL}`);
 
 function App() {
   const [users, setUsers] = useState([]);
-  const [userInput, setUserInput] = useState('');
-  const [walletAddress, setWalletAddress] = useState('');
+  // const [userInput, setUserInput] = useState('');
+  // const [walletAddress, setWalletAddress] = useState('');
   
   useEffect(() => {
     const fetchUsers = async () => {
@@ -23,48 +19,50 @@ function App() {
     fetchUsers();
   }, []);
 
-  function addUser(e) {
-    setUserInput(e.target.value);
-  }
+  // function addUser(e) {
+  //   setUserInput(e.target.value);
+  // }
 
-  function addWalletAddress(e) {
-    setWalletAddress(e.target.value);
-  }
+  // function addWalletAddress(e) {
+  //   setWalletAddress(e.target.value);
+  // }
 
-  function submitUser(e) {
-    e.preventDefault();
-    if (!userInput.trim()) return;
+  // function submitUser(e) {
+  //   e.preventDefault();
+  //   if (!userInput.trim()) return;
     
-    const newUser = {
-      id: users.length + 1,
-      username: userInput,
-      walletAddress: walletAddress,
-      games: [],
-    }
-    console.log(newUser);
+  //   const newUser = {
+  //     id: users.length + 1,
+  //     username: userInput,
+  //     walletAddress: walletAddress,
+  //     games: [],
+  //   }
+  //   console.log(newUser);
 
-    axios.post(`${apiURL}/users`, newUser).then(response => {
-      setUsers([...users, response.data]);
-      setUserInput('');
-      setWalletAddress('');
-    })
-  }
+  //   axios.post(`${apiURL}/users`, newUser).then(response => {
+  //     setUsers([...users, response.data]);
+  //     setUserInput('');
+  //     setWalletAddress('');
+  //   })
+  // }
 
-  function ConnectWallet() {
-    const { isConnected } = useAccount();
-    if (isConnected) return <Account />;
-    return <WalletOptions />;
-  }
+  // function ConnectWallet() {
+  //   const { isConnected } = useAccount();
+  //   if (isConnected) return <Account />;
+  //   return <WalletOptions />;
+  // }
 
-  const queryClient = new QueryClient()
+  // const queryClient = new QueryClient();
 
   return (
     <Box>
-      <WagmiProvider config={config}>
-        <QueryClientProvider client={queryClient}>
-          <ConnectWallet />
-          <Text color='black' fontSize='2xl' fontWeight='bold' marginBottom='1rem'>Login to your account</Text>
-          <form onSubmit={submitUser}>
+      {/* <WagmiProvider config={config}>
+        <QueryClientProvider client={queryClient}> */}
+          <Text color='black' fontSize='2xl' fontWeight='bold' marginBottom='1rem'>Welcome!</Text>
+          <GameList />
+          {/* <ConnectWallet /> */}
+
+          {/* <form onSubmit={submitUser}>
             <Input type="text" width='200px' placeholder="Enter username" value={userInput} onChange={addUser} />
             <Input type="text" width='200px' placeholder="Enter wallet address" value={walletAddress} onChange={addWalletAddress} />
             <Button type='submit' marginLeft='5px' marginBottom='5px' width='70px' fontWeight='bold' onClick={submitUser}>Login</Button>
@@ -78,9 +76,10 @@ function App() {
                 </li>
               )
             })}
-          </ul>
-        </QueryClientProvider>
-      </WagmiProvider>
+          </ul> */}
+
+        {/* </QueryClientProvider>
+      </WagmiProvider> */}
     </Box>
   )
 }
