@@ -1,6 +1,11 @@
 import { useState, React, useEffect } from 'react';
 import axios from 'axios';
 import { Text, Button, Input, Link, Box } from '@chakra-ui/react';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { WagmiProvider, useAccount } from 'wagmi';
+import { config } from './wagmi.config';
+import { Account } from './components/account';
+import WalletOptions from './components/wallet-options';
 
 const apiURL = import.meta.env.VITE_URL;
 // console.log(`API URL: ${apiURL}`);
@@ -45,24 +50,37 @@ function App() {
     })
   }
 
+  function ConnectWallet() {
+    const { isConnected } = useAccount();
+    if (isConnected) return <Account />;
+    return <WalletOptions />;
+  }
+
+  const queryClient = new QueryClient()
+
   return (
     <Box>
-      <Text color='black' fontSize='2xl' fontWeight='bold' marginBottom='1rem'>Login to your account</Text>
-      <form onSubmit={submitUser}>
-        <Input type="text" width='200px' placeholder="Enter username" value={userInput} onChange={addUser} />
-        <Input type="text" width='200px' placeholder="Enter wallet address" value={walletAddress} onChange={addWalletAddress} />
-        <Button type='submit' marginLeft='5px' marginBottom='5px' width='70px' fontWeight='bold' onClick={submitUser}>Login</Button>
-        <Text fontWeight='bold' fontSize='xl' marginTop='0.5rem' color='black'>Find your username below</Text>
-      </form>
-      <ul>
-        {users.map(user => {
-          return (
-            <li key={user.id}>
-              <Link variant='plain' _hover={{textDecoration: 'underline', color: 'blue.600'}} href={`/${user.id}/games`} color='black'>{user.username}</Link>
-            </li>
-          )
-        })}
-      </ul>
+      <WagmiProvider config={config}>
+        <QueryClientProvider client={queryClient}>
+          <ConnectWallet />
+          <Text color='black' fontSize='2xl' fontWeight='bold' marginBottom='1rem'>Login to your account</Text>
+          <form onSubmit={submitUser}>
+            <Input type="text" width='200px' placeholder="Enter username" value={userInput} onChange={addUser} />
+            <Input type="text" width='200px' placeholder="Enter wallet address" value={walletAddress} onChange={addWalletAddress} />
+            <Button type='submit' marginLeft='5px' marginBottom='5px' width='70px' fontWeight='bold' onClick={submitUser}>Login</Button>
+            <Text fontWeight='bold' fontSize='xl' marginTop='0.5rem' color='black'>Find your username below</Text>
+          </form>
+          <ul>
+            {users.map(user => {
+              return (
+                <li key={user.id}>
+                  <Link variant='plain' _hover={{textDecoration: 'underline', color: 'blue.600'}} href={`/${user.id}/games`} color='black'>{user.username}</Link>
+                </li>
+              )
+            })}
+          </ul>
+        </QueryClientProvider>
+      </WagmiProvider>
     </Box>
   )
 }
