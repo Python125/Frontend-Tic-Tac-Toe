@@ -7,9 +7,6 @@ import { config } from '../wagmi.config';
 import { Account } from './Account';
 import WalletOptions from './WalletOptions';
 
-const apiURL = import.meta.env.VITE_URL;
-// console.log('API URL:', apiURL);
-
 function GameList({ userId }) {
   const [games, setGames] = useState([]);
   const [gameInput, setGameInput] = useState('');

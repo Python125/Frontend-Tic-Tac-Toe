@@ -4,11 +4,8 @@ import { Text, Button, Box, Link, Input } from '@chakra-ui/react';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { WagmiProvider, useAccount } from 'wagmi';
 import { config } from '../wagmi.config';
-import { Account } from './account';
+import { Account } from './Account';
 import WalletOptions from './WalletOptions';
-
-const apiURL = import.meta.env.VITE_URL;
-console.log('API URL:', apiURL);
 
 function Game() {
     const [isConnected, setIsConnected] = useState(false);
