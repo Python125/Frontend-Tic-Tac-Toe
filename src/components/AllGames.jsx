@@ -67,7 +67,7 @@ function GameList({ userId }) {
     <Box>
       <WagmiProvider config={config}>
         <QueryClientProvider client={queryClient}>
-          <ConnectWallet />
+          {/* <ConnectWallet /> */}
 
           {isConnected && (
             <>
