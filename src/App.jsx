@@ -6,6 +6,7 @@ import { WagmiProvider, useAccount } from 'wagmi';
 import { config } from './wagmi.config';
 import { Account } from './components/Account';
 import WalletOptions from './components/WalletOptions';
+import AllGames from './components/AllGames';
 
 const apiURL = import.meta.env.VITE_URL;
 // console.log(`API URL: ${apiURL}`);
@@ -67,10 +68,14 @@ function App() {
     <Box>
       <WagmiProvider config={config}>
         <QueryClientProvider client={queryClient}>
-          <Text color='black' fontSize='2xl' fontWeight='bold' marginBottom='1rem'>Login to your account</Text>
+          {isConnected ? (
+            <Text color='black' fontSize='2xl' fontWeight='bold' marginBottom='1rem'>Wallet is connected</Text>
+          ) : (
+            <Text color='black' fontSize='2xl' fontWeight='bold' marginBottom='1rem'>Connect to your wallet to play games</Text>
+          )}
           <div>
             <ConnectWallet />
-            {isConnected && <AllGames />}           
+            {isConnected && <AllGames />}
           </div>
 
           <Link backgroundColor='blue' color='white' padding='0.5rem' borderRadius='0.3rem' marginTop='1rem' href={'/games'}>View Games</Link>
