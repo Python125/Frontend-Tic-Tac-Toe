@@ -23,7 +23,7 @@ createRoot(document.getElementById('root')).render(
         <div style={{ backgroundColor: 'white', height: '100vh', textAlign: 'center' }}>
           <Routes>
             <Route path="/" element={<App />} />
-            <Route path="/games" element={<GameList />} />
+            <Route path="/:userId/games" element={<GameList />} />
             <Route path="/games/:gameId" element={<SingleGame />} />
           </Routes>
         </div>
