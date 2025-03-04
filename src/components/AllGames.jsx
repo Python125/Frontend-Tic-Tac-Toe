@@ -13,7 +13,6 @@ const apiURL = import.meta.env.VITE_URL;
 function GameList({ userId }) {
   const [games, setGames] = useState([]);
   const [gameInput, setGameInput] = useState('');
-  const [username, setUsername] = useState('');
   const [isConnected, setIsConnected] = useState(false);
 
   useEffect(() => {
@@ -21,7 +20,6 @@ function GameList({ userId }) {
       const response = await axios.get(`${apiURL}/games`);
       const gamesData = Array.isArray(response.data) ? response.data : [];
       setGames(gamesData);
-      setUsername(response.data.username || '');
     }
     fetchGames();
   }, []);
@@ -50,7 +48,7 @@ function GameList({ userId }) {
       setGameInput('');
     })
   }
-  console.log('games',games);
+  // console.log('games',games);
 
   function ConnectWallet() {
     const { isConnected } = useAccount();
