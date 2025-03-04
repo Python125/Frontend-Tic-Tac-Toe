@@ -50,7 +50,7 @@ function GameList({ userId }) {
       setGameInput('');
     })
   }
-  // console.log('games',games);
+  console.log('games',games);
 
   function ConnectWallet() {
     const { isConnected } = useAccount();
@@ -67,7 +67,7 @@ function GameList({ userId }) {
     <Box>
       <WagmiProvider config={config}>
         <QueryClientProvider client={queryClient}>
-          {/* <ConnectWallet /> */}
+          <ConnectWallet />
 
           {isConnected && (
             <>
