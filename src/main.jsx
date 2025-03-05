@@ -1,10 +1,15 @@
 import { StrictMode } from 'react';
+import { Provider } from './components/ui/provider';
+import { WagmiProvider } from 'wagmi';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { config } from './wagmi.config';
 import { createRoot } from 'react-dom/client';
 import { BrowserRouter, Routes, Route, useParams } from 'react-router';
-import { Provider } from './components/ui/provider';
 import AllGames from './components/AllGames';
 import Game from './components/Game';
-import App from './App';
+import HomePage from './components/HomePage';
+
+const queryClient = new QueryClient();
 
 function GameList() {
   const { userId } = useParams();
@@ -19,15 +24,19 @@ function SingleGame() {
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     <Provider>
-      <BrowserRouter>
-        <div style={{ backgroundColor: 'white', height: '100vh', textAlign: 'center' }}>
-          <Routes>
-            <Route path="/" element={<App />} />
-            <Route path="/games" element={<GameList />} />
-            <Route path="/games/:gameId" element={<SingleGame />} />
-          </Routes>
-        </div>
-      </BrowserRouter>
+      <WagmiProvider config={config}>
+        <QueryClientProvider client={queryClient}>
+          <BrowserRouter>
+            <div style={{ backgroundColor: 'white', height: '100vh', textAlign: 'center' }}>
+              <Routes>
+                <Route path="/" element={<HomePage />} />
+                <Route path="/games" element={<GameList />} />
+                <Route path="/games/:gameId" element={<SingleGame />} />
+              </Routes>
+            </div>
+          </BrowserRouter>
+        </QueryClientProvider>
+      </WagmiProvider>
     </Provider>
   </StrictMode>
 )
