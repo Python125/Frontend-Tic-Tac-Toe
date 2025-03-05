@@ -10,7 +10,8 @@ import WalletOptions from './WalletOptions';
 const apiURL = import.meta.env.VITE_URL;
 // console.log(`API URL: ${apiURL}`);
 
-function GameList({ userId }) {
+// function GameList({ userId }) {}
+function GameList() {
   const [games, setGames] = useState([]);
   const [gameInput, setGameInput] = useState('');
   const [isConnected, setIsConnected] = useState(false);
@@ -39,7 +40,7 @@ function GameList({ userId }) {
       minBuyInAmount: 0,
       maxBuyInAmount: 0,
       status: 'Active',
-      userId: Number(userId),
+      // userId: Number(userId),
     }
     console.log(newGame);
 

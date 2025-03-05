@@ -12,8 +12,8 @@ import HomePage from './components/HomePage';
 const queryClient = new QueryClient();
 
 function GameList() {
-  const { userId } = useParams();
-  return (<AllGames userId={userId} />)
+  const { gameId } = useParams();
+  return (<AllGames gameId={gameId} />)
 }
 
 function SingleGame() {

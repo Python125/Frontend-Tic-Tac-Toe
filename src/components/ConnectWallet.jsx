@@ -3,7 +3,7 @@ import { Text, Box, Link } from '@chakra-ui/react';
 import { Account } from './Account';
 import WalletOptions from './WalletOptions';
 
-function ConnectUserWallet() {
+function ConnectWallet() {
     const { isConnected } = useAccount();
 
     return (
@@ -26,4 +26,4 @@ function ConnectUserWallet() {
     )
 }
 
-export default ConnectUserWallet;
+export default ConnectWallet;
