@@ -1,10 +1,10 @@
 import { React } from 'react';
-import ConnectWallet from './ConnectWallet';
+import UserWallet from './UserWallet';
 
 function HomePage() {
 
     return (
-        <ConnectWallet />
+        <UserWallet />
     )
 }
 
