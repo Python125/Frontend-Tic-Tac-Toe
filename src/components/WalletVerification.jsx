@@ -18,18 +18,6 @@ function WalletVerification() {
         }
     }, [isConnected, address]);
 
-    // Fetch nonce from server
-    const fetchNonce = async () => {
-        try {
-            const response = await axios.get(`${apiURL}/nonce`, {
-                params: { address }
-            });
-            setNonce(response.data.nonce);
-        } catch (error) {
-            console.error('Error fetching nonce:', error);
-        }
-    };
-
     // If user has a nonce and is connected, sign the message
     useEffect(() => {
         if (nonce && address) {
@@ -45,10 +33,22 @@ function WalletVerification() {
         }
     }, [signature, nonce, address]);
 
+    // Fetch nonce from server
+    const fetchNonce = async () => {
+        try {
+            const response = await axios.get(`${apiURL}/auth/nonce`, {
+                params: { address }
+            });
+            setNonce(response.data.nonce);
+        } catch (error) {
+            console.error('Error fetching nonce:', error);
+        }
+    };
+
     // Verify signature with server
     const verifySignature = async () => {
         try {
-            const response = await axios.post(`${apiURL}/verify`, {
+            const response = await axios.post(`${apiURL}/auth/verify`, {
                 address,
                 nonce,
                 signature,
