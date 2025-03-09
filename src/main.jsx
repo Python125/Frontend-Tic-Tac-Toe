@@ -8,6 +8,7 @@ import { BrowserRouter, Routes, Route, useParams } from 'react-router';
 import AllGames from './components/AllGames';
 import Game from './components/Game';
 import HomePage from './components/HomePage';
+import WalletVerification from './components/WalletVerification';
 
 const queryClient = new QueryClient();
 
@@ -26,6 +27,7 @@ createRoot(document.getElementById('root')).render(
     <Provider>
       <WagmiProvider config={config}>
         <QueryClientProvider client={queryClient}>
+          <WalletVerification />
           <BrowserRouter>
             <div style={{ backgroundColor: 'white', height: '100vh', textAlign: 'center' }}>
               <Routes>
