@@ -12,6 +12,7 @@ function ConnectUserWallet() {
                 <>
                     <Text color='black' fontSize='2xl' fontWeight='bold' marginBottom='1rem'>Wallet is connected</Text>
                     <Account />
+                    <Link backgroundColor='black' color='white' padding='0.5rem' borderRadius='0.3rem' marginTop='1rem' href={'/games'}>View Games</Link>
                 </>
             ) : (
                 <>
