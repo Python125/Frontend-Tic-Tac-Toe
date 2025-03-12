@@ -11,9 +11,17 @@ function WalletVerification() {
     const [nonce, setNonce] = useState('');
     const [isVerified, setIsVerified] = useState(false);
 
+    // console.log(
+    //     isConnected,
+    //     signature,
+    //     nonce,
+    //     isVerified
+    // )
+
     // If user connects wallet, request a nonce from server
     useEffect(() => {
         if (isConnected && address) {
+            console.log('Fetching nonce for address:', address);
             fetchNonce();
         }
     }, [isConnected, address]);
@@ -39,6 +47,7 @@ function WalletVerification() {
             const response = await axios.get(`${apiURL}/auth/nonce`, {
                 params: { address }
             });
+            console.log('Received nonce:', response.data.nonce);
             setNonce(response.data.nonce);
         } catch (error) {
             console.error('Error fetching nonce:', error);
@@ -65,8 +74,10 @@ function WalletVerification() {
     // Save user data to server
     const saveUserData = async () => {
         try {
-            await axios.post(`${apiURL}/users`, {
+            const response = await axios.post(`${apiURL}/users`, {
                 address,
+                nonce,
+                signature,
             });
             console.log('User data saved successfully');
         } catch (error) {
@@ -77,7 +88,14 @@ function WalletVerification() {
     return (
         <div>
             {!isConnected && <button>Connect Wallet</button>}
-            {isConnected && !isVerified && <p>Verifying your wallet ownership...</p>}
+            {isConnected && !isVerified && (
+                <div>
+                    <p>Verifying your wallet ownership...</p>
+                    <p>Address: {address}</p>
+                    <p>Nonce: {nonce ? 'Yes': 'No'}</p>
+                    <p>Signature: {signature ? 'Yes': 'No'}</p>
+                </div>
+            )}
             {isVerified && <p>Wallet verified! Your data has been saved.</p>}
         </div>
     );
