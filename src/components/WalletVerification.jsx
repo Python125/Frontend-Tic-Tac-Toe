@@ -11,12 +11,12 @@ function WalletVerification() {
     const [nonce, setNonce] = useState('');
     const [isVerified, setIsVerified] = useState(false);
 
-    console.log(
-        isConnected,
-        signature,
-        nonce,
-        isVerified
-    )
+    // console.log(
+    //     isConnected,
+    //     signature,
+    //     nonce,
+    //     isVerified
+    // )
 
     // If user connects wallet, request a nonce from server
     useEffect(() => {
