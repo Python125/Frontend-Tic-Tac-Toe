@@ -75,9 +75,8 @@ function WalletVerification() {
     const saveUserData = async () => {
         try {
             const response = await axios.post(`${apiURL}/users`, {
-                address,
-                nonce,
-                signature,
+                username: address.slice(0, 8),
+                walletAddress: address,
             });
             console.log('User data saved successfully');
         } catch (error) {
