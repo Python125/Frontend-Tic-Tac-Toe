@@ -8,6 +8,7 @@ function WalletOptions() {
     <Button
       backgroundColor="black"
       color="white"
+      marginTop="1rem"
       key={connector.id}
       onClick={() => connect({ connector })}
     >
