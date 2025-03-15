@@ -10,7 +10,7 @@ export function Account() {
   return (
     <Box>
       {ensAvatar && <img src={ensAvatar} alt="ENS Avatar" />}
-      {address && <div>{ensName ? `${ensName} (${address})` : address}</div>}
+      {/* {address && <div>{ensName ? `${ensName} (${address})` : address}</div>} */}
       <Button
         backgroundColor="black"
         color="white"
