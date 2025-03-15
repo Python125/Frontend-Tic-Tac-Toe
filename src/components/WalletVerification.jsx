@@ -1,8 +1,8 @@
 import { useAccount, useSignMessage } from 'wagmi';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
-import { useDispatch, useSelector } from 'react-redux';
-import { setWalletConnection, setWalletNonce, setWalletSignature, setWalletVerification, setWalletError } from '../features/wallet/walletSlice';
+// import { useDispatch, useSelector } from 'react-redux';
+// import { setWalletConnection, setWalletNonce, setWalletSignature, setWalletVerification, setWalletError } from '../features/wallet/walletSlice';
 
 const apiURL = import.meta.env.VITE_URL;
 // console.log(apiURL);
@@ -12,14 +12,14 @@ function WalletVerification() {
     const { data: signature, signMessage } = useSignMessage();
     const [nonce, setNonce] = useState('');
     const [isVerified, setIsVerified] = useState(false);
-    const dispatch = useDispatch();
+    // const dispatch = useDispatch();
 
     // If user connects wallet, request a nonce from server
     useEffect(() => {
         if (isConnected && address) {
             // console.log('Fetching nonce for address:', address);
-            dispatch(setWalletConnection(isConnected));
-            dispatch(setWalletAddress(address));
+            // dispatch({ isConnected });
+            // dispatch({ address });
             fetchNonce();
         }
     }, [isConnected, address]);
@@ -27,7 +27,7 @@ function WalletVerification() {
     // If user has a nonce and is connected, sign the message
     useEffect(() => {
         if (nonce && address) {
-            dispatch(setWalletNonce(nonce));
+            // dispatch({ nonce });
             const message = `Sign this message to verify your wallet ownership: ${nonce}`;
             signMessage({ message });
         }
@@ -36,7 +36,7 @@ function WalletVerification() {
     // If user signs message, verify signature to server
     useEffect(() => {
         if (signature && nonce && address) {
-            dispatch(setWalletSignature(signature));
+            // dispatch(setWalletSignature(signature));
             verifySignature();
         }
     }, [signature, nonce, address]);
@@ -48,10 +48,11 @@ function WalletVerification() {
                 params: { address }
             });
             // console.log('Received nonce:', response.data.nonce);
-            dispatch(setWalletNonce(response.data.nonce));
+            // dispatch(response.data.nonce);
+            setNonce(response.data.nonce);
         } catch (error) {
             console.error('Error fetching nonce:', error);
-            dispatch(setWalletError(error.message));
+            //dispatch(setWalletError(error.message));
         }
     };
 
@@ -64,12 +65,13 @@ function WalletVerification() {
                 signature,
             });
             if (response.data.verified) {
-                dispatch(setWalletVerification(true));
+                // dispatch(setWalletVerification(true));
+                setIsVerified(true);
                 saveUserData();
             }
         } catch (error) {
             console.error('Error verifying signature:', error);
-            dispatch(setWalletError(error.message));
+            // dispatch(setWalletError(error.message));
         }
     };
 
@@ -81,10 +83,11 @@ function WalletVerification() {
                 walletAddress: address,
             });
             console.log('User data saved successfully');
-            dispatch(setWalletVerification(true));
+            // dispatch(setWalletVerification(true));
+            // setIsVerified(true);
         } catch (error) {
             console.error('Error saving user data:', error);
-            dispatch(setWalletError(error.message));
+            // dispatch(setWalletError(error.message));
         }
     };
 
