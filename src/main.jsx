@@ -1,5 +1,5 @@
 import { StrictMode } from 'react';
-import { ChakraProvider, theme } from '@chakra-ui/react';
+import { ChakraProvider, defaultSystem } from '@chakra-ui/react';
 import { WagmiProvider } from 'wagmi';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { config } from './wagmi.config';
@@ -11,6 +11,14 @@ import HomePage from './components/HomePage';
 import WalletVerification from './components/WalletVerification';
 import { store } from './app/store';
 import { Provider } from 'react-redux';
+
+// const theme = {
+//   config: {
+//     useSystemColorMode: false,
+//     initialColorMode: 'light',
+//     cssVarPrefix: "chakra",
+//   },
+// }
 
 const queryClient = new QueryClient();
 
@@ -26,7 +34,7 @@ function SingleGame() {
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <ChakraProvider theme={theme}>
+    <ChakraProvider value={defaultSystem}>
       <Provider store={store}>
         <WagmiProvider config={config}>
           <QueryClientProvider client={queryClient}>
