@@ -12,14 +12,6 @@ import WalletVerification from './components/WalletVerification';
 import { store } from './app/store';
 import { Provider } from 'react-redux';
 
-// const theme = {
-//   config: {
-//     useSystemColorMode: false,
-//     initialColorMode: 'light',
-//     cssVarPrefix: "chakra",
-//   },
-// }
-
 const queryClient = new QueryClient();
 
 function GameList() {
