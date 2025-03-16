@@ -18,6 +18,7 @@ function WalletVerification() {
     useEffect(() => {
         if (isConnected && address) {
             // console.log('Fetching nonce for address:', address);
+            console.log('isConnected:', isConnected);
             dispatch(setWalletConnection({ isConnected, address }));
             fetchNonce();
         }
@@ -35,6 +36,9 @@ function WalletVerification() {
     // If user signs message, verify signature to server
     useEffect(() => {
         if (signature && nonce && address) {
+            console.log('Signature:', signature);
+            console.log('Nonce:', nonce);
+            console.log('Address:', address);
             dispatch(setWalletSignature(signature));
             verifySignature();
         }
@@ -46,7 +50,7 @@ function WalletVerification() {
             const response = await axios.get(`${apiURL}/auth/nonce`, {
                 params: { address }
             });
-            // console.log('Received nonce:', response.data.nonce);
+            console.log('Received nonce:', response.data.nonce);
             dispatch(setWalletNonce(response.data.nonce));
             setNonce(response.data.nonce);
         } catch (error) {
@@ -64,6 +68,7 @@ function WalletVerification() {
                 signature,
             });
             if (response.data.verified) {
+                console.log('Signature verified!');
                 dispatch(setWalletVerification(true));
                 setIsVerified(true);
                 saveUserData();
