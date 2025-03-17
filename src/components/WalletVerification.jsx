@@ -13,36 +13,54 @@ function WalletVerification() {
     const [nonce, setNonce] = useState('');
     const [isVerified, setIsVerified] = useState(false);
     const dispatch = useDispatch();
+    const finalDependencies = [isConnected, address, signature, signMessage, nonce];
 
-    // If user connects wallet, request a nonce from server
     useEffect(() => {
         if (isConnected && address) {
             // console.log('Fetching nonce for address:', address);
             console.log('isConnected:', isConnected);
             dispatch(setWalletConnection({ isConnected, address }));
             fetchNonce();
-        }
-    }, [isConnected, address]);
-
-    // If user has a nonce and is connected, sign the message
-    useEffect(() => {
-        if (nonce && address) {
+        } else if (nonce && address) {
             const message = `Sign this message to verify your wallet ownership: ${nonce}`;
             dispatch(setWalletNonce(nonce));
             signMessage({ message });
-        }
-    }, [nonce, address, signMessage]);
-
-    // If user signs message, verify signature to server
-    useEffect(() => {
-        if (signature && nonce && address) {
-            console.log('Signature:', signature);
-            console.log('Nonce:', nonce);
-            console.log('Address:', address);
+        } else if (signature && nonce && address) {
             dispatch(setWalletSignature(signature));
             verifySignature();
         }
-    }, [signature, nonce, address]);
+    }, [...finalDependencies]);
+
+    // If user connects wallet, request a nonce from server
+    // useEffect(() => {
+    //     if (isConnected && address) {
+    //         // console.log('Fetching nonce for address:', address);
+    //         console.log('isConnected:', isConnected);
+    //         dispatch(setWalletConnection({ isConnected, address }));
+    //         fetchNonce();
+    //     }
+    // }, [isConnected, address]);
+
+
+    // If user has a nonce and is connected, sign the message
+    // useEffect(() => {
+    //     if (nonce && address) {
+    //         const message = `Sign this message to verify your wallet ownership: ${nonce}`;
+    //         dispatch(setWalletNonce(nonce));
+    //         signMessage({ message });
+    //     }
+    // }, [nonce, address, signMessage]);
+
+    // If user signs message, verify signature to server
+    // useEffect(() => {
+    //     if (signature && nonce && address) {
+    //         console.log('Signature:', signature);
+    //         console.log('Nonce:', nonce);
+    //         console.log('Address:', address);
+    //         dispatch(setWalletSignature(signature));
+    //         verifySignature();
+    //     }
+    // }, [signature, nonce, address]);
 
     // Fetch nonce from server
     const fetchNonce = async () => {
