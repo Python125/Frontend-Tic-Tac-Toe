@@ -4,7 +4,7 @@ import { Box, Button } from "@chakra-ui/react";
 export function Account() {
   const { disconnect } = useDisconnect();
   const { address } = useAccount();
-  const { data: ensName } = useEnsName({ address });
+  // const { data: ensName } = useEnsName({ address });
   const { data: ensAvatar } = useEnsAvatar({ address });
 
   return (

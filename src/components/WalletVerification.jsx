@@ -44,7 +44,6 @@ function WalletVerification() {
         }
     }, [isConnected, address]);
 
-
     // If user has a nonce and is connected, sign the message
     useEffect(() => {
         if (nonce && address) {
@@ -57,9 +56,9 @@ function WalletVerification() {
     // If user signs message, verify signature to server
     useEffect(() => {
         if (signature && nonce && address) {
-            console.log('Signature:', signature);
-            console.log('Nonce:', nonce);
-            console.log('Address:', address);
+            // console.log('Signature:', signature);
+            // console.log('Nonce:', nonce);
+            // console.log('Address:', address);
             dispatch(setWalletSignature(signature));
             verifySignature();
         }
@@ -71,7 +70,7 @@ function WalletVerification() {
             const response = await axios.get(`${apiURL}/auth/nonce`, {
                 params: { address }
             });
-            console.log('Received nonce:', response.data.nonce);
+            // console.log('Received nonce:', response.data.nonce);
             dispatch(setWalletNonce(response.data.nonce));
             setNonce(response.data.nonce);
         } catch (error) {
@@ -109,7 +108,7 @@ function WalletVerification() {
             });
             console.log('User data saved successfully');
             dispatch(setWalletVerification(true));
-            setIsVerified(true);
+            setIsVerified(response.data.verified);
         } catch (error) {
             console.error('Error saving user data:', error);
             dispatch(setWalletError(error.message));
