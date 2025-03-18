@@ -8,7 +8,7 @@ import { BrowserRouter, Routes, Route, useParams } from 'react-router';
 import AllGames from './components/AllGames';
 import Game from './components/Game';
 import HomePage from './components/HomePage';
-import WalletVerification from './components/WalletVerification';
+// import WalletVerification from './components/WalletVerification';
 import { store } from './app/store';
 import { Provider } from 'react-redux';
 
@@ -25,14 +25,14 @@ function SingleGame() {
 }
 
 createRoot(document.getElementById('root')).render(
-  <StrictMode>
+  // <StrictMode>
     <ChakraProvider value={defaultSystem}>
       <Provider store={store}>
         <WagmiProvider config={config}>
           <QueryClientProvider client={queryClient}>
             <BrowserRouter>
               <div style={{ backgroundColor: 'white', height: '100vh', textAlign: 'center' }}>
-                <WalletVerification />
+                {/* <WalletVerification /> */}
                 <Routes>
                   <Route path="/" element={<HomePage />} />
                   <Route path="/games" element={<GameList />} />
@@ -44,5 +44,5 @@ createRoot(document.getElementById('root')).render(
         </WagmiProvider>
       </Provider>
     </ChakraProvider>
-  </StrictMode>
+  // </StrictMode>
 )

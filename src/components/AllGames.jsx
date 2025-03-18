@@ -64,8 +64,8 @@ function GameList() {
 
   return (
     <Box>
-      <WagmiProvider config={config}>
-        <QueryClientProvider client={queryClient}>
+      {/* <WagmiProvider config={config}> */}
+        {/* <QueryClientProvider client={queryClient}> */}
           <ConnectWallet />
 
           {isConnected && (
@@ -91,9 +91,8 @@ function GameList() {
               )
             })}
           </ul>
-
-          </QueryClientProvider>
-        </WagmiProvider>
+        {/* </QueryClientProvider> */}
+      {/* </WagmiProvider> */}
     </Box>
   )
 }

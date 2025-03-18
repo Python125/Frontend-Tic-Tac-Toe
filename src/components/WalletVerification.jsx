@@ -13,19 +13,22 @@ function WalletVerification() {
     const [nonce, setNonce] = useState('');
     const [isVerified, setIsVerified] = useState(false);
     const dispatch = useDispatch();
-    const finalDependencies = [isConnected, address, signature, signMessage, nonce];
+    const finalDependencies = [isConnected, address, signature];
 
     useEffect(() => {
         if (isConnected && address) {
             // console.log('Fetching nonce for address:', address);
-            console.log('isConnected:', isConnected);
+            // console.log('isConnected:', isConnected);
+            console.log('Step 1: Connecting address:', address);
             dispatch(setWalletConnection({ isConnected, address }));
             fetchNonce();
         } else if (nonce && address) {
+            console.log('Step 2: Got nonce, attempting to sign:', nonce);
             const message = `Sign this message to verify your wallet ownership: ${nonce}`;
             dispatch(setWalletNonce(nonce));
             signMessage({ message });
         } else if (signature && nonce && address) {
+            console.log('Step 3: Got signature, verifying:', signature);
             dispatch(setWalletSignature(signature));
             verifySignature();
         }
