@@ -56,8 +56,8 @@ function WalletVerification() {
     // If user signs message, verify signature to server
     useEffect(() => {
         if (signature && nonce && address) {
-            // console.log('Signature:', signature);
-            // console.log('Nonce:', nonce);
+            console.log('Nonce:', nonce);
+            console.log('Signature:', signature);
             // console.log('Address:', address);
             dispatch(setWalletSignature(signature));
             verifySignature();
@@ -117,16 +117,18 @@ function WalletVerification() {
 
     return (
         <div>
-            {/* {!isConnected && <button>Connect Wallet</button>} */}
-            {isConnected && !isVerified && (
-                <div>
-                    <p>Verifying your wallet ownership...</p>
+            {signature ? (
+                <>
                     <p>Address: {address}</p>
-                    <p>Nonce: {nonce ? 'Yes': 'No'}</p>
-                    <p>Signature: {signature ? 'Yes': 'No'}</p>
-                </div>
+                    <p>Nonce: {nonce}</p>
+                    {/* <p>Nonce: {nonce ? 'Yes': 'No'}</p> */}
+                    <p>Signature: {signature}</p>
+                    {/* <p>Signature: {signature ? 'Yes': 'No'}</p> */}
+                    <p>Wallet verified! Your data has been saved.</p>
+                </>
+                ) : (
+                <p>Please sign the message to verify your wallet ownership...</p>
             )}
-            {isVerified && <p>Wallet verified! Your data has been saved.</p>}
         </div>
     );
 }
