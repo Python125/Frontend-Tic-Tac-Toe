@@ -13,7 +13,7 @@ function WalletVerification() {
     const [nonce, setNonce] = useState('');
     const [isVerified, setIsVerified] = useState(false);
     const dispatch = useDispatch();
-    const finalDependencies = [isConnected, address, signature];
+    // const finalDependencies = [isConnected, address, signature];
 
     // useEffect(() => {
     //     if (isConnected && address) {
