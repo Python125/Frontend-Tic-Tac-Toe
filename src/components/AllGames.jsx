@@ -1,11 +1,11 @@
 import { useState, React, useEffect } from "react";
 import axios from "axios";
 import { Text, Box, Link, Input } from '@chakra-ui/react';
-import { QueryClient } from '@tanstack/react-query';
+// import { QueryClient } from '@tanstack/react-query';
 import { useAccount } from 'wagmi';
 import { Account } from './Account';
 import WalletOptions from './WalletOptions';
-
+import WalletVerification from './WalletVerification';
 const apiURL = import.meta.env.VITE_URL;
 // console.log(`API URL: ${apiURL}`);
 
@@ -19,6 +19,7 @@ function GameList() {
       const response = await axios.get(`${apiURL}/games`);
       const gamesData = Array.isArray(response.data) ? response.data : [];
       setGames(gamesData);
+      
     }
     fetchGames();
   }, []);
@@ -58,12 +59,12 @@ function GameList() {
     return <WalletOptions />;
   }
 
-  const queryClient = new QueryClient();
+  // const queryClient = new QueryClient();
 
   return (
     <Box>
       <ConnectWallet />
-
+      <WalletVerification />
       {isConnected && (
         <>
           <Text fontWeight='bold' fontSize='2xl'>Create a new game</Text>
@@ -73,7 +74,6 @@ function GameList() {
         </>
       )}
 
-      {/* <Text fontWeight='bold' fontSize='2xl'>Join or Observe a game below</Text> */}
       <ul>
         {games.map(game => {
           return (

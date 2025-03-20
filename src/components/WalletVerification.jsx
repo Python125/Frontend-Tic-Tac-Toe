@@ -125,7 +125,7 @@ function WalletVerification() {
                     <p>Wallet verified! Your data has been saved.</p>
                 </>
                 ) : (
-                <p>Please sign the message to verify your wallet ownership...</p>
+                    <p>Please sign the message to verify your wallet ownership...</p>
             )}
         </div>
     );
