@@ -120,10 +120,8 @@ function WalletVerification() {
             {signature ? (
                 <>
                     <p>Address: {address}</p>
-                    <p>Nonce: {nonce}</p>
-                    {/* <p>Nonce: {nonce ? 'Yes': 'No'}</p> */}
-                    <p>Signature: {signature}</p>
-                    {/* <p>Signature: {signature ? 'Yes': 'No'}</p> */}
+                    {/* <p>Nonce: {nonce}</p> */}
+                    {/* <p>Signature: {signature}</p> */}
                     <p>Wallet verified! Your data has been saved.</p>
                 </>
                 ) : (
