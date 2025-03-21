@@ -5,7 +5,8 @@ import { Text, Box, Link, Input } from '@chakra-ui/react';
 import { useAccount } from 'wagmi';
 import { Account } from './Account';
 import WalletOptions from './WalletOptions';
-import WalletVerification from './WalletVerification';
+import SharedWallet from './sharedWallet';
+
 const apiURL = import.meta.env.VITE_URL;
 // console.log(`API URL: ${apiURL}`);
 
@@ -19,7 +20,6 @@ function GameList() {
       const response = await axios.get(`${apiURL}/games`);
       const gamesData = Array.isArray(response.data) ? response.data : [];
       setGames(gamesData);
-      
     }
     fetchGames();
   }, []);
@@ -64,7 +64,7 @@ function GameList() {
   return (
     <Box>
       <ConnectWallet />
-      <WalletVerification />
+      <SharedWallet />
       {isConnected && (
         <>
           <Text fontWeight='bold' fontSize='2xl'>Create a new game</Text>

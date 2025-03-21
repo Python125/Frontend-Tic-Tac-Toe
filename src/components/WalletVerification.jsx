@@ -4,7 +4,7 @@ import axios from 'axios';
 import { useDispatch } from 'react-redux';
 import { setWalletConnection, setWalletNonce, setWalletSignature, setWalletVerification, setWalletError } from '../features/wallet/walletSlice';
 import { Button } from '@chakra-ui/react';
-
+import SharedWallet from './sharedWallet';
 const apiURL = import.meta.env.VITE_URL;
 // console.log(apiURL);
 
@@ -117,28 +117,7 @@ function WalletVerification() {
     };
 
     return (
-        <div>
-            {signature ? (
-                <>
-                    <p>Address: {address}</p>
-                    <Button
-                        onClick={() => {
-                            navigator.clipboard.writeText(address);
-                            alert("Address copied to clipboard");
-                        }}
-                        style={{ cursor: "pointer" }}
-                        title="Copy address to clipboard"
-                        >
-                        Copy address
-                    </Button>
-                    {/* <p>Nonce: {nonce}</p> */}
-                    {/* <p>Signature: {signature}</p> */}
-                    <p>Wallet verified! Your data has been saved.</p>
-                </>
-                ) : (
-                    <p>Please sign the message to verify your wallet ownership...</p>
-            )}
-        </div>
+        <SharedWallet />
     );
 }
 
