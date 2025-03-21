@@ -119,7 +119,19 @@ function WalletVerification() {
         <div>
             {signature ? (
                 <>
-                    <p>Address: {address}</p>
+                    <p>
+                        Address:{" "}
+                        <span
+                            onClick={() => {
+                                navigator.clipboard.writeText(address);
+                                alert("Address copied to clipboard");
+                            }}
+                            style={{ cursor: "pointer" }}
+                            title="Copy address to clipboard"
+                            >
+                            {address}
+                        </span>
+                    </p>
                     {/* <p>Nonce: {nonce}</p> */}
                     {/* <p>Signature: {signature}</p> */}
                     <p>Wallet verified! Your data has been saved.</p>
