@@ -2,7 +2,7 @@ import { useAccount } from 'wagmi';
 import { Box, Link } from '@chakra-ui/react';
 import { Account } from './Account';
 import WalletOptions from './WalletOptions';
-import WalletVerification from './WalletVerification';
+// import ConnectWalletButton from './ConnectWalletButton';
 
 function UserWallet() {
     const { isConnected } = useAccount();

@@ -7,8 +7,9 @@ import { WagmiProvider, useAccount } from 'wagmi';
 import { Account } from './Account';
 import WalletOptions from './WalletOptions';
 
-function Game() {
+function SingleGamePage() {
     const [isConnected, setIsConnected] = useState(false);
+    const { gameId } = useParams();
   
     function ConnectWallet() {
       const { isConnected } = useAccount();
@@ -33,4 +34,4 @@ function Game() {
     )
 }
 
-export default Game;
+export default SingleGamePage;

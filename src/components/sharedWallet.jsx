@@ -14,7 +14,7 @@ function SharedWallet() {
 
     useEffect(() => {
         dispatch(setWalletConnection(isConnected));
-      }, [isConnected, address, dispatch]);
+    }, [isConnected, address, dispatch]);
 
     return (
         <div>
@@ -39,16 +39,6 @@ function SharedWallet() {
                     <p>Please sign the message to verify your wallet ownership...</p>
             )}
         </div>
-    //     <Box>
-    //         {isConnected ? (
-    //         <>
-    //             <Account />
-    //             <WalletVerification />
-    //         </>
-    //         ) : (
-    //         <WalletOptions />
-    //         )}
-    //   </Box>
     );
 }
 

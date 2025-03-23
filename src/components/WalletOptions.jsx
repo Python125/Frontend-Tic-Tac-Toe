@@ -12,7 +12,7 @@ function WalletOptions() {
       key={connector.id}
       onClick={() => connect({ connector })}
     >
-      Connect {connector.name}
+      Connect Wallet
     </Button>
   ));
 }

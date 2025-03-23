@@ -5,7 +5,8 @@ import { Text, Box, Link, Input } from '@chakra-ui/react';
 import { useAccount } from 'wagmi';
 import { Account } from './Account';
 import WalletOptions from './WalletOptions';
-import SharedWallet from './sharedWallet';
+// import SharedWallet from './SharedWallet';
+import ConnectWalletButton from './ConnectWalletButton';
 
 const apiURL = import.meta.env.VITE_URL;
 // console.log(`API URL: ${apiURL}`);
@@ -62,9 +63,10 @@ function GameList() {
   // const queryClient = new QueryClient();
 
   return (
-    <Box>
-      <ConnectWallet />
-      <SharedWallet />
+    <div>
+      <ConnectWalletButton />
+      {/* <ConnectWallet />
+      <SharedWallet /> */}
       {isConnected && (
         <>
           <Text fontWeight='bold' fontSize='2xl'>Create a new game</Text>
@@ -87,7 +89,7 @@ function GameList() {
           )
         })}
       </ul>
-    </Box>
+    </div>
   )
 }
 

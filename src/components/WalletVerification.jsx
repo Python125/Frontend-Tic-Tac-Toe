@@ -3,8 +3,8 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useDispatch } from 'react-redux';
 import { setWalletConnection, setWalletNonce, setWalletSignature, setWalletVerification, setWalletError } from '../features/wallet/walletSlice';
-import { Button } from '@chakra-ui/react';
-import SharedWallet from './sharedWallet';
+import SharedWallet from './SharedWallet';
+
 const apiURL = import.meta.env.VITE_URL;
 // console.log(apiURL);
 
@@ -14,26 +14,6 @@ function WalletVerification() {
     const [nonce, setNonce] = useState('');
     const [isVerified, setIsVerified] = useState(false);
     const dispatch = useDispatch();
-    // const finalDependencies = [isConnected, address, signature];
-
-    // useEffect(() => {
-    //     if (isConnected && address) {
-    //         // console.log('Fetching nonce for address:', address);
-    //         // console.log('isConnected:', isConnected);
-    //         console.log('Step 1: Connecting address:', address);
-    //         dispatch(setWalletConnection({ isConnected, address }));
-    //         fetchNonce();
-    //     } else if (nonce && address) {
-    //         console.log('Step 2: Got nonce, attempting to sign:', nonce);
-    //         const message = `Sign this message to verify your wallet ownership: ${nonce}`;
-    //         dispatch(setWalletNonce(nonce));
-    //         signMessage({ message });
-    //     } else if (signature && nonce && address) {
-    //         console.log('Step 3: Got signature, verifying:', signature);
-    //         dispatch(setWalletSignature(signature));
-    //         verifySignature();
-    //     }
-    // }, [...finalDependencies]);
 
     // If user connects wallet, request a nonce from server
     useEffect(() => {
