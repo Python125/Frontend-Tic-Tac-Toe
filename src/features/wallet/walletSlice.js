@@ -14,7 +14,8 @@ const walletSlice = createSlice({
     initialState,
     reducers: {
         setWalletConnection: (state, action) => {
-            state.isConnected = action.payload;
+            state.isConnected = action.payload.isConnected;
+            state.address = action.payload.address;
         },
         setWalletNonce: (state, action) => {
             state.nonce = action.payload;

@@ -1,6 +1,6 @@
 // @ts-check
 
-import { http, createConfig } from 'wagmi';
+import { http, createConfig, createStorage } from 'wagmi';
 import { base, mainnet } from 'wagmi/chains';
 import { metaMask } from 'wagmi/connectors';
 
@@ -15,4 +15,5 @@ export const config = createConfig({
     [mainnet.id]: http(),
     [base.id]: http(),
   },
+  storage: createStorage({ storage: window.localStorage }),
 });
