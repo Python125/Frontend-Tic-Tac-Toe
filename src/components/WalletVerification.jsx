@@ -1,19 +1,46 @@
 import { useAccount, useSignMessage } from 'wagmi';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
-
+import { useDispatch } from 'react-redux';
+import { setWalletConnection, setWalletNonce, setWalletSignature, setWalletVerification, setWalletError } from '../features/wallet/walletSlice';
+import { Button } from '@chakra-ui/react';
+import SharedWallet from './sharedWallet';
 const apiURL = import.meta.env.VITE_URL;
-console.log(apiURL);
+// console.log(apiURL);
 
 function WalletVerification() {
     const { address, isConnected } = useAccount();
     const { data: signature, signMessage } = useSignMessage();
     const [nonce, setNonce] = useState('');
     const [isVerified, setIsVerified] = useState(false);
+    const dispatch = useDispatch();
+    // const finalDependencies = [isConnected, address, signature];
+
+    // useEffect(() => {
+    //     if (isConnected && address) {
+    //         // console.log('Fetching nonce for address:', address);
+    //         // console.log('isConnected:', isConnected);
+    //         console.log('Step 1: Connecting address:', address);
+    //         dispatch(setWalletConnection({ isConnected, address }));
+    //         fetchNonce();
+    //     } else if (nonce && address) {
+    //         console.log('Step 2: Got nonce, attempting to sign:', nonce);
+    //         const message = `Sign this message to verify your wallet ownership: ${nonce}`;
+    //         dispatch(setWalletNonce(nonce));
+    //         signMessage({ message });
+    //     } else if (signature && nonce && address) {
+    //         console.log('Step 3: Got signature, verifying:', signature);
+    //         dispatch(setWalletSignature(signature));
+    //         verifySignature();
+    //     }
+    // }, [...finalDependencies]);
 
     // If user connects wallet, request a nonce from server
     useEffect(() => {
         if (isConnected && address) {
+            // console.log('Fetching nonce for address:', address);
+            console.log('isConnected:', isConnected);
+            dispatch(setWalletConnection({ isConnected, address }));
             fetchNonce();
         }
     }, [isConnected, address]);
@@ -22,6 +49,7 @@ function WalletVerification() {
     useEffect(() => {
         if (nonce && address) {
             const message = `Sign this message to verify your wallet ownership: ${nonce}`;
+            dispatch(setWalletNonce(nonce));
             signMessage({ message });
         }
     }, [nonce, address, signMessage]);
@@ -29,6 +57,10 @@ function WalletVerification() {
     // If user signs message, verify signature to server
     useEffect(() => {
         if (signature && nonce && address) {
+            console.log('Nonce:', nonce);
+            console.log('Signature:', signature);
+            // console.log('Address:', address);
+            dispatch(setWalletSignature(signature));
             verifySignature();
         }
     }, [signature, nonce, address]);
@@ -39,9 +71,12 @@ function WalletVerification() {
             const response = await axios.get(`${apiURL}/auth/nonce`, {
                 params: { address }
             });
+            // console.log('Received nonce:', response.data.nonce);
+            dispatch(setWalletNonce(response.data.nonce));
             setNonce(response.data.nonce);
         } catch (error) {
             console.error('Error fetching nonce:', error);
+            dispatch(setWalletError(error.message));
         }
     };
 
@@ -54,32 +89,35 @@ function WalletVerification() {
                 signature,
             });
             if (response.data.verified) {
+                console.log('Signature verified!');
+                dispatch(setWalletVerification(true));
                 setIsVerified(true);
                 saveUserData();
             }
         } catch (error) {
             console.error('Error verifying signature:', error);
+            dispatch(setWalletError(error.message));
         }
     };
 
     // Save user data to server
     const saveUserData = async () => {
         try {
-            await axios.post(`${apiURL}/users`, {
-                address,
+            const response = await axios.post(`${apiURL}/users`, {
+                username: address.slice(0, 8),
+                walletAddress: address,
             });
             console.log('User data saved successfully');
+            dispatch(setWalletVerification(true));
+            setIsVerified(response.data.verified);
         } catch (error) {
             console.error('Error saving user data:', error);
+            dispatch(setWalletError(error.message));
         }
     };
 
     return (
-        <div>
-            {!isConnected && <button>Connect Wallet</button>}
-            {isConnected && !isVerified && <p>Verifying your wallet ownership...</p>}
-            {isVerified && <p>Wallet verified! Your data has been saved.</p>}
-        </div>
+        <SharedWallet />
     );
 }
 

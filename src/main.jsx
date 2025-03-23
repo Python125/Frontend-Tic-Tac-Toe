@@ -1,5 +1,5 @@
 import { StrictMode } from 'react';
-import { Provider } from './components/ui/provider';
+import { ChakraProvider, defaultSystem } from '@chakra-ui/react';
 import { WagmiProvider } from 'wagmi';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { config } from './wagmi.config';
@@ -8,7 +8,11 @@ import { BrowserRouter, Routes, Route, useParams } from 'react-router';
 import AllGames from './components/AllGames';
 import Game from './components/Game';
 import HomePage from './components/HomePage';
-import WalletVerification from './components/WalletVerification';
+import Header from './components/Header';
+// import WalletVerification from './components/WalletVerification';
+import { store, persistor } from './app/store';
+import { Provider } from 'react-redux';
+import { PersistGate } from 'redux-persist/integration/react';
 
 const queryClient = new QueryClient();
 
@@ -23,22 +27,29 @@ function SingleGame() {
 }
 
 createRoot(document.getElementById('root')).render(
-  <StrictMode>
-    <Provider>
-      <WagmiProvider config={config}>
-        <QueryClientProvider client={queryClient}>
-          <WalletVerification />
-          <BrowserRouter>
-            <div style={{ backgroundColor: 'white', height: '100vh', textAlign: 'center' }}>
-              <Routes>
-                <Route path="/" element={<HomePage />} />
-                <Route path="/games" element={<GameList />} />
-                <Route path="/games/:gameId" element={<SingleGame />} />
-              </Routes>
-            </div>
-          </BrowserRouter>
-        </QueryClientProvider>
-      </WagmiProvider>
-    </Provider>
-  </StrictMode>
+  // <StrictMode>
+    <ChakraProvider value={defaultSystem}>
+      <Provider store={store}>
+        <PersistGate loading={null} persistor={persistor}>
+          <WagmiProvider config={config}>
+            <QueryClientProvider client={queryClient}>
+              <BrowserRouter>
+                <div style={{ backgroundColor: 'white', height: '100vh', textAlign: 'center' }}>
+                  <Header />
+                  <div style={{ paddingTop: '80px' }}>
+                    {/* <WalletVerification /> */}
+                    <Routes>
+                      <Route path="/" element={<HomePage />} />
+                      <Route path="/games" element={<GameList />} />
+                      <Route path="/games/:gameId" element={<SingleGame />} />
+                    </Routes>                  
+                  </div>
+                </div>
+              </BrowserRouter>
+            </QueryClientProvider>
+          </WagmiProvider>
+        </PersistGate>
+      </Provider>
+    </ChakraProvider>
+  // </StrictMode>
 )
