@@ -1,6 +1,6 @@
 import { useState, React, useEffect } from "react";
 import axios from "axios";
-import { Text, Input, Box, Link, Button, Dialog, Portal } from '@chakra-ui/react';
+import { Text, Input, Box, Link, Button, Dialog, CloseButton } from '@chakra-ui/react';
 // import { QueryClient } from '@tanstack/react-query';
 import { useAccount } from 'wagmi';
 import AuthHeader from './AuthHeader';
@@ -61,11 +61,15 @@ function GamesPage() {
               <Dialog.Positioner>
                 <Dialog.Content border='1px solid white' backgroundColor='gray.700' color='white' width='500px'>
                   <Dialog.Body>
-                    <Input color='white' type="text" marginBottom='10px' marginTop='10px' placeholder="Enter new game" onChange={addGame} value={gameInput} />
+                    <Input color='white' width='85%' type="text" marginBottom='10px' marginTop='10px' placeholder="Enter new game" onChange={addGame} value={gameInput} />
+                    <Input color='white' width='85%' type="number" marginBottom='10px' marginTop='10px' placeholder="Enter amount" onChange={addGame} value={gameInput} />
                   </Dialog.Body>
                   <Dialog.Footer justifyContent='center'>
                     <Button backgroundColor='gray.900' color='white' border='1px solid white' borderRadius='md' marginTop='20px' size='lg'>Create Challenge</Button>
                   </Dialog.Footer>
+                  <Dialog.CloseTrigger asChild>
+                    <CloseButton size="sm" backgroundColor='white' color='black' />
+                  </Dialog.CloseTrigger>
                 </Dialog.Content>
               </Dialog.Positioner>
             </Dialog.Root>
