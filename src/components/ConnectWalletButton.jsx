@@ -101,8 +101,7 @@ function ConnectWalletButton() {
         <div>
             {connectors.map((connector) => (
                 <Button
-                    backgroundColor="black" color="white"
-                    marginTop="1rem"
+                    backgroundColor="white" color="black"
                     key={connector.id}
                     onClick={() => connect({ connector })}
                 >

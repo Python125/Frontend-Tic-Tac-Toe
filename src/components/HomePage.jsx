@@ -1,6 +1,6 @@
 import { React } from 'react';
 import AuthHeader from './AuthHeader';
-import { Box, Heading, Link } from '@chakra-ui/react';
+import { Box, Heading, Link, Text } from '@chakra-ui/react';
 import ConnectWalletButton from './ConnectWalletButton';
 import { useAccount } from 'wagmi';
 
@@ -10,14 +10,16 @@ function HomePage() {
     return (
         <>
             <AuthHeader />
-            <Box backgroundColor='gray.900' height='100%' justifyContent='center' alignItems='center' display='flex'>
-                <Heading size='6xl' color='white'>Hardcore TicTacToe</Heading>
-                <Box>
-                    {!isConnected && 
+            <Box backgroundColor='gray.900' height='100%' justifyContent='center' alignItems='center' display='flex' flexDirection='column'>
+                <Heading fontWeight='400' size='6xl' color='white'>Hardcore TicTacToe</Heading>
+                <Text fontWeight='300' color='white' fontSize='2xl'>Your gateway to decentralized gaming</Text>
+                
+                <Box display='flex' gap='1rem' justifyContent='center' alignItems='center' marginTop='1rem'>
+                    {!isConnected &&
                         <ConnectWalletButton />
                     }
 
-                    <Link backgroundColor='black' color='white' padding='0.5rem' borderRadius='0.3rem' marginTop='1rem' href={'/games'}>View Games</Link>
+                    <Link backgroundColor='gray.900' color='white' border='1px solid white' borderRadius='md' padding='0.5rem' href={'/games'}>See Games</Link>
                 </Box>
             </Box>
         </>
