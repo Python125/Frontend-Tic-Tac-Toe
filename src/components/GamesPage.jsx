@@ -62,7 +62,7 @@ function GamesPage() {
                 <Dialog.Content border='1px solid white' backgroundColor='gray.700' color='white' width='500px'>
                   <Dialog.Body>
                     <Input color='white' width='85%' type="text" marginBottom='10px' marginTop='10px' placeholder="Enter new game" onChange={addGame} value={gameInput} />
-                    <Input color='white' width='85%' type="number" marginBottom='10px' marginTop='10px' placeholder="Enter amount" onChange={addGame} value={gameInput} />
+                    <Input color='white' width='85%' type="number" marginBottom='10px' marginTop='10px' placeholder="Enter amount" />
                   </Dialog.Body>
                   <Dialog.Footer justifyContent='center'>
                     <Button backgroundColor='gray.900' color='white' border='1px solid white' borderRadius='md' marginTop='20px' size='lg'>Create Challenge</Button>
