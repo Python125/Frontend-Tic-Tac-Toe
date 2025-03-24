@@ -1,5 +1,6 @@
 import { React } from "react";
 import { Input, Button, Dialog, CloseButton } from '@chakra-ui/react';
+import { Toaster, toaster } from "./ui/toaster"
 
 function CreateGameModal() {
 
@@ -17,7 +18,18 @@ function CreateGameModal() {
                             <Input color='white' width='85%' type="number" marginBottom='10px' marginTop='10px' placeholder="Enter amount" />
                         </Dialog.Body>
                         <Dialog.Footer justifyContent='center'>
-                            <Button backgroundColor='gray.900' color='white' border='1px solid white' borderRadius='md' marginTop='20px' size='lg'>Create Challenge</Button>
+                            <Button variant='outline' backgroundColor='gray.900' color='white' border='1px solid white' borderRadius='md' marginTop='20px' size='lg' 
+                            onClick={() => toaster.create({
+                                title: 'Game created',
+                                description: 'Game created successfully',
+                            })}>
+                                Create Challenge
+                            </Button>
+                            <Toaster toaster={toaster.create({
+                                title: 'Game created',
+                                description: 'Game created successfully',
+                                type: 'success',
+                            })}></Toaster>
                         </Dialog.Footer>
                         <Dialog.CloseTrigger asChild>
                             <CloseButton size="sm" backgroundColor='white' color='black' />

@@ -6,6 +6,8 @@ import { useAccount } from 'wagmi';
 import AuthHeader from './AuthHeader';
 import CreateGameModal from './CreateGameModal';
 
+const apiURL = import.meta.env.VITE_URL;
+
 function GamesPage() {
   const [games, setGames] = useState([]);
   const [gameInput, setGameInput] = useState('');
