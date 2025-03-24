@@ -6,7 +6,7 @@ import { useAccount } from 'wagmi';
 
 function HomePage() {
     const { isConnected } = useAccount();
-    
+
     return (
         <>
             <AuthHeader />

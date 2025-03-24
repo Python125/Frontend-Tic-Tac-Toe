@@ -1,4 +1,4 @@
-import { Box, Text, Button, Heading } from '@chakra-ui/react';
+import { Box, Text, Button, Heading, Separator } from '@chakra-ui/react';
 import ConnectWalletButton from './ConnectWalletButton';
 import { useAccount, useDisconnect } from 'wagmi';
 
