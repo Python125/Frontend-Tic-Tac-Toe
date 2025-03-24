@@ -48,7 +48,7 @@ function GameList() {
   return (
     <>
       <AuthHeader />
-      <Box backgroundColor='gray.900' height='100%' color='white' display='flex' justifyContent='space-between' padding='0 200px'>
+      <Box backgroundColor='gray.900' height='100%' color='white' display='flex' justifyContent='space-between' padding='0 700px'>
         {isConnected && (
           <>
             <Text fontWeight='300' fontSize='2xl' marginTop='20px'>Available Games</Text>
@@ -60,7 +60,7 @@ function GameList() {
         )}
       </Box>
 
-      {/* <Box backgroundColor='gray.900' height='100%' color='white'>
+      <Box backgroundColor='gray.900' height='100%' color='white'>
         <ul>
           {games.map(game => {
             return (
@@ -74,7 +74,7 @@ function GameList() {
             )
           })}
         </ul>
-      </Box> */}
+      </Box>
     </>
   )
 }
