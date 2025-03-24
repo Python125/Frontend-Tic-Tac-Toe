@@ -1,9 +1,10 @@
 import { useState, React, useEffect } from "react";
 import axios from "axios";
-import { Text, Input, Box, Link, Button, Dialog, CloseButton } from '@chakra-ui/react';
+import { Text, Box, Link } from '@chakra-ui/react';
 // import { QueryClient } from '@tanstack/react-query';
 import { useAccount } from 'wagmi';
 import AuthHeader from './AuthHeader';
+import CreateGameModal from './CreateGameModal';
 
 function GamesPage() {
   const [games, setGames] = useState([]);
@@ -52,27 +53,7 @@ function GamesPage() {
         {isConnected && (
           <>
             <Text fontWeight='300' fontSize='2xl' marginTop='20px'>Available Games</Text>
-
-            <Dialog.Root>
-              <Dialog.Trigger asChild>
-                <Button backgroundColor='gray.900' color='white' border='1px solid white' borderRadius='md' marginTop='20px' size='lg'>Create Challenge</Button>
-              </Dialog.Trigger>
-              <Dialog.Backdrop />
-              <Dialog.Positioner>
-                <Dialog.Content border='1px solid white' backgroundColor='gray.700' color='white' width='500px'>
-                  <Dialog.Body>
-                    <Input color='white' width='85%' type="text" marginBottom='10px' marginTop='10px' placeholder="Enter new game" onChange={addGame} value={gameInput} />
-                    <Input color='white' width='85%' type="number" marginBottom='10px' marginTop='10px' placeholder="Enter amount" />
-                  </Dialog.Body>
-                  <Dialog.Footer justifyContent='center'>
-                    <Button backgroundColor='gray.900' color='white' border='1px solid white' borderRadius='md' marginTop='20px' size='lg'>Create Challenge</Button>
-                  </Dialog.Footer>
-                  <Dialog.CloseTrigger asChild>
-                    <CloseButton size="sm" backgroundColor='white' color='black' />
-                  </Dialog.CloseTrigger>
-                </Dialog.Content>
-              </Dialog.Positioner>
-            </Dialog.Root>
+            <CreateGameModal />
           </>
         )}
       </Box>
