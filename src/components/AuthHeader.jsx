@@ -1,4 +1,4 @@
-import { Box, Text, Button, Heading, Separator } from '@chakra-ui/react';
+import { Box, Text, Button, Heading } from '@chakra-ui/react';
 import ConnectWalletButton from './ConnectWalletButton';
 import { useAccount, useDisconnect } from 'wagmi';
 
@@ -11,7 +11,7 @@ function AuthHeader() {
             <Heading size='xl' color='white'>Hardcore TicTacToe</Heading>
             {isConnected ? (
                 <>
-                    <Text marginLeft='67%'>Address: {address}</Text>
+                    <Text marginLeft='67%'>{address}</Text>
                     <Button backgroundColor='gray.800' color='white' borderRadius='md' onClick={() => disconnect()}>Disconnect</Button>
                 </>
             ) : (

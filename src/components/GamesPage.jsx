@@ -1,20 +1,14 @@
 import { useState, React, useEffect } from "react";
 import axios from "axios";
-import { Text, Box, Link, Input } from '@chakra-ui/react';
+import { Text, Input, Box, Link, Button } from '@chakra-ui/react';
 // import { QueryClient } from '@tanstack/react-query';
 import { useAccount } from 'wagmi';
-import { Account } from './Account';
-import WalletOptions from './WalletOptions';
-// import SharedWallet from './SharedWallet';
-import ConnectWalletButton from './ConnectWalletButton';
-
-const apiURL = import.meta.env.VITE_URL;
-// console.log(`API URL: ${apiURL}`);
+import AuthHeader from './AuthHeader';
 
 function GameList() {
   const [games, setGames] = useState([]);
   const [gameInput, setGameInput] = useState('');
-  const [isConnected, setIsConnected] = useState(false);
+  const { isConnected } = useAccount();
 
   useEffect(() => {
     const fetchGames = async () => {
@@ -51,45 +45,37 @@ function GameList() {
   }
   // console.log('games',games);
 
-  function ConnectWallet() {
-    const { isConnected } = useAccount();
-    useEffect(() => {
-      setIsConnected(isConnected);
-    }, [isConnected]);
-    if (isConnected) return <Account />;
-    return <WalletOptions />;
-  }
-
-  // const queryClient = new QueryClient();
-
   return (
-    <div>
-      <ConnectWalletButton />
-      {/* <ConnectWallet />
-      <SharedWallet /> */}
-      {isConnected && (
-        <>
-          <Text fontWeight='bold' fontSize='2xl'>Create a new game</Text>
-          <form onSubmit={submitGame}>
-            <Input type="text" width='200px' marginBottom='10px' marginTop='10px' placeholder="Enter new game" onChange={addGame} value={gameInput} />
-          </form>
-        </>
-      )}
+    <>
+      <AuthHeader />
+      <Box backgroundColor='gray.900' height='100%' color='white' display='flex' justifyContent='space-between' padding='0 200px'>
+        {isConnected && (
+          <>
+            <Text fontWeight='300' fontSize='2xl' marginTop='20px'>Available Games</Text>
+            <Button backgroundColor='gray.900' color='white' border='1px solid white' borderRadius='md' marginTop='20px'>Create Challenge</Button>
+            {/* <form onSubmit={submitGame}>
+              <Input color='white' type="text" width='200px' marginBottom='10px' marginTop='10px' placeholder="Enter new game" onChange={addGame} value={gameInput} />
+            </form> */}
+          </>
+        )}
+      </Box>
 
-      <ul>
-        {games.map(game => {
-          return (
-            <li key={game.id}>
-              {isConnected ? (
-                <Link variant='plain' _hover={{textDecoration: 'underline', color: 'blue.600'}} href={`/games/${game.id}`} color='black'>{game.name}</Link>
-              ) : (
-                <Text color='gray.800'>{game.name}</Text>
-              )}
-            </li>
-          )
-        })}
-      </ul>
-    </div>
+      {/* <Box backgroundColor='gray.900' height='100%' color='white'>
+        <ul>
+          {games.map(game => {
+            return (
+              <li key={game.id}>
+                {isConnected ? (
+                  <Link variant='plain' _hover={{textDecoration: 'underline', color: 'blue.600'}} href={`/games/${game.id}`} color='white'>{game.name}</Link>
+                ) : (
+                  <Text color='white'>{game.name}</Text>
+                )}
+              </li>
+            )
+          })}
+        </ul>
+      </Box> */}
+    </>
   )
 }
 
