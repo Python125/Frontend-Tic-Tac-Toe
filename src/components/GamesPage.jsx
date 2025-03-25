@@ -1,7 +1,6 @@
 import { useState, React, useEffect } from "react";
 import axios from "axios";
 import { Text, Box, Link } from '@chakra-ui/react';
-// import { QueryClient } from '@tanstack/react-query';
 import { useAccount } from 'wagmi';
 import AuthHeader from './AuthHeader';
 import CreateGameModal from './CreateGameModal';
