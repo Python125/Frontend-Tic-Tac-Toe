@@ -1,51 +1,28 @@
-import { useState, React, useEffect } from "react";
-import axios from "axios";
-import { Text, Box, Link } from '@chakra-ui/react';
-import { useAccount } from 'wagmi';
+import { React, useEffect } from "react";
 import AuthHeader from './AuthHeader';
+import { Text, Box } from '@chakra-ui/react';
 import CreateGameModal from './CreateGameModal';
+// import AvailableGames from './AvailableGames';
+import { useAccount } from 'wagmi';
+import { useDispatch } from 'react-redux';
+import { setAllGames } from '../features/games/gameSlice';
+import axios from 'axios';
 
 const apiURL = import.meta.env.VITE_URL;
+// console.log(apiURL);
 
 function GamesPage() {
-  const [games, setGames] = useState([]);
-  const [gameInput, setGameInput] = useState('');
   const { isConnected } = useAccount();
+  const dispatch = useDispatch();
 
   useEffect(() => {
     const fetchGames = async () => {
       const response = await axios.get(`${apiURL}/games`);
       const gamesData = Array.isArray(response.data) ? response.data : [];
-      setGames(gamesData);
+      dispatch(setAllGames(gamesData));
     }
     fetchGames();
   }, []);
-
-  function addGame(e) {
-    setGameInput(e.target.value);
-  }
-
-  function submitGame(e) {
-    e.preventDefault();
-    if (!gameInput.trim()) return;
-
-    const newGame = {
-      id: games.length + 1,
-      name: gameInput,
-      maxParticipantCount: 2,
-      minBuyInAmount: 0,
-      maxBuyInAmount: 0,
-      status: 'Active',
-      // userId: Number(userId),
-    }
-    console.log(newGame);
-
-    axios.post(`${apiURL}/games`, newGame).then(response => {
-      setGames([...games, response.data]);
-      setGameInput('');
-    })
-  }
-  // console.log('games',games);
 
   return (
     <>
@@ -60,19 +37,7 @@ function GamesPage() {
       </Box>
 
       <Box backgroundColor='gray.900' height='100%' color='white'>
-        <ul>
-          {games.map(game => {
-            return (
-              <li key={game.id}>
-                {isConnected ? (
-                  <Link variant='plain' _hover={{textDecoration: 'underline', color: 'blue.600'}} href={`/games/${game.id}`} color='white'>{game.name}</Link>
-                ) : (
-                  <Text color='white'>{game.name}</Text>
-                )}
-              </li>
-            )
-          })}
-        </ul>
+        {/* <AvailableGames /> */}
       </Box>
     </>
   )
