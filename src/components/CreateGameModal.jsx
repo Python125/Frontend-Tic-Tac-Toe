@@ -1,5 +1,5 @@
-import { useState, React, useEffect } from "react";
-import { Input, Button, Dialog, CloseButton, Box, List, Link, Text } from '@chakra-ui/react';
+import { useState, React } from "react";
+import { Input, Button, Dialog, CloseButton } from '@chakra-ui/react';
 import { toaster } from "./ui/toaster";
 import axios from "axios";
 import { useAccount } from "wagmi";
@@ -16,28 +16,32 @@ function CreateGameModal() {
     const { isConnected } = useAccount();
     const dispatch = useDispatch();
 
-    function submitGame(e) {
+    function handleSubmit(e) {
         e.preventDefault();
         if (!gameInput.trim()) return;
+
+        toaster.create({
+            title: 'Game created',
+            description: 'Game created successfully',
+            type: 'success',
+        });
 
         const newGame = {
             id: games.length + 1,
             name: gameInput,
             maxParticipantCount: 2,
-            minBuyInAmount: gameAmount,
-            maxBuyInAmount: gameAmount,
+            minBuyInAmount: parseFloat(gameAmount),
+            maxBuyInAmount: parseFloat(gameAmount),
             status: 'Active',
-            // userId: Number(userId),
         }
         console.log(newGame);
 
         axios.post(`${apiURL}/games`, newGame).then(response => {
+            setGames([...games, response.data]);
             dispatch(addGame(response.data));
-            // setGames([...games, response.data]);
             setGameInput('');
             setGameAmount('');
-        })
-        // console.log('games',games);
+        });
     }
 
     return (
@@ -55,37 +59,14 @@ function CreateGameModal() {
                     <Dialog.Header>
                         <Dialog.Title color='black'>Create New Challenge</Dialog.Title>
                     </Dialog.Header>
-                        <Dialog.Body justifyContent='center' alignItems='center' onSubmit={submitGame}>
-                            <Input color='white' width='85%' type="text" marginBottom='10px' marginTop='10px' placeholder="Enter new game" _placeholder={{ color: 'gray.600' }} onChange={setGameInput} value={gameInput} />
-                            <Input color='white' width='85%' type="number" marginBottom='10px' marginTop='10px' placeholder="Enter amount" _placeholder={{ color: 'gray.600' }} onChange={setGameAmount} value={gameAmount} />
-                            <Box>
-                                <List.Root>
-                                    {games.map(game => {
-                                        return (
-                                        <List.Item key={game.id}>
-                                            {isConnected ? (
-                                                <Link variant='plain' _hover={{textDecoration: 'underline', color: 'blue.600'}} href={`/games/${game.id}`} color='white'>{game.name}</Link>
-                                            ) : (
-                                                <Text color='white'>{game.name}</Text>
-                                            )}
-                                        </List.Item>
-                                        )
-                                    })}
-                                </List.Root>
+                        <Dialog.Body justifyContent='center' alignItems='center'>
+                            <Input color='black' width='85%' type="text" marginBottom='10px' marginTop='10px' placeholder="Enter new game" _placeholder={{ color: 'gray.600' }} value={gameInput} onChange={(e) => setGameInput(e.target.value)} />
+                            <Input color='black' width='85%' type="number" marginBottom='10px' marginTop='10px' placeholder="Enter amount" _placeholder={{ color: 'gray.600' }} value={gameAmount} onChange={(e) => setGameAmount(e.target.value)} />                            
                                 <Button variant='outline' backgroundColor='gray.900' color='white' border='1px solid white' borderRadius='md' marginTop='20px' size='lg'
-                                    onClick={() => toaster.create({
-                                        title: 'Game created',
-                                        description: 'Game created successfully',
-                                        type: 'success',
-                                    })}>
+                                    onClick={handleSubmit}>
                                     Create
                                 </Button>
-                            </Box>
-
                         </Dialog.Body>
-                        {/* <Dialog.CloseTrigger asChild>
-                            <CloseButton size="sm" backgroundColor='white' color='black' />
-                        </Dialog.CloseTrigger> */}
                     </Dialog.Content>
                 </Dialog.Positioner>
             </Dialog.Root>

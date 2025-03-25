@@ -2,7 +2,7 @@ import { React, useEffect } from "react";
 import AuthHeader from './AuthHeader';
 import { Text, Box } from '@chakra-ui/react';
 import CreateGameModal from './CreateGameModal';
-// import AvailableGames from './AvailableGames';
+import AvailableGames from './AvailableGames';
 import { useAccount } from 'wagmi';
 import { useDispatch } from 'react-redux';
 import { setAllGames } from '../features/games/gameSlice';
@@ -37,7 +37,7 @@ function GamesPage() {
       </Box>
 
       <Box backgroundColor='gray.900' height='100%' color='white'>
-        {/* <AvailableGames /> */}
+        <AvailableGames />
       </Box>
     </>
   )
