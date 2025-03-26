@@ -27,7 +27,7 @@ function GamesPage() {
   return (
     <>
       <AuthHeader />
-      <Box backgroundColor='gray.900' color='white' display='flex' justifyContent='space-between' padding='0 500px'>
+      <Box backgroundColor='gray.900' color='white' display='flex' justifyContent='space-between' padding='0 600px'>
         {isConnected && (
           <>
             <Text fontWeight='300' fontSize='2xl' marginTop='20px'>Available Games</Text>
