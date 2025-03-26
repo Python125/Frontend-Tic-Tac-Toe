@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useDispatch } from 'react-redux';
 import { setWalletConnection, setWalletNonce, setWalletSignature, setWalletVerification, setWalletError } from '../features/wallet/walletSlice';
-import SharedWallet from './SharedWallet';
+import { Box, Text } from '@chakra-ui/react';
 
 const apiURL = import.meta.env.VITE_URL;
 // console.log(apiURL);
@@ -97,7 +97,16 @@ function WalletVerification() {
     };
 
     return (
-        <SharedWallet />
+        <Box color='white'>
+            {isConnected && !isVerified && (
+                <Box display='flex' flexDirection='column' gap='10px'>
+                    <Text>Address: {address}</Text>
+                    {/* <Text>Nonce: {nonce}</Text>
+                    <Text>Signature: {signature}</Text> */}
+                </Box>
+            )}
+            {isVerified && <Text>Wallet verified! Your data has been saved.</Text>}
+        </Box>
     );
 }
 
