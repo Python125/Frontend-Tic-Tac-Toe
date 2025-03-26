@@ -13,6 +13,7 @@ function CreateGameModal() {
     const [games, setGames] = useState([]);
     const [gameInput, setGameInput] = useState('');
     const [gameAmount, setGameAmount] = useState('');
+    const [isDialogOpen, setIsDialogOpen] = useState(false);
     const { isConnected } = useAccount();
     const dispatch = useDispatch();
 
@@ -41,12 +42,16 @@ function CreateGameModal() {
             dispatch(addGame(response.data));
             setGameInput('');
             setGameAmount('');
+            
+            setTimeout(() => {
+                setIsDialogOpen(false);
+            }, 3000);
         });
     }
 
     return (
         <>
-            <Dialog.Root>
+            <Dialog.Root open={isDialogOpen} onOpenChange={setIsDialogOpen}>
                 <Dialog.Trigger asChild>
                     <Button backgroundColor='gray.900' color='white' border='1px solid white' borderRadius='md' marginTop='20px' size='lg'>Create Challenge</Button>
                 </Dialog.Trigger>

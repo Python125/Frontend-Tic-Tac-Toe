@@ -100,8 +100,8 @@ function WalletVerification() {
         <Box color='white'>
             {isConnected && !isVerified && (
                 <Box display='flex' flexDirection='column' gap='10px'>
-                    <Text>Address: {address}</Text>
-                    {/* <Text>Nonce: {nonce}</Text>
+                    {/* <Text>Address: {address}</Text>
+                    <Text>Nonce: {nonce}</Text>
                     <Text>Signature: {signature}</Text> */}
                 </Box>
             )}
