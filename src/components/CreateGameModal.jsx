@@ -42,10 +42,7 @@ function CreateGameModal() {
             dispatch(addGame(response.data));
             setGameInput('');
             setGameAmount('');
-            
-            setTimeout(() => {
-                setIsDialogOpen(false);
-            }, 3000);
+            setIsDialogOpen(false);
         });
     }
 

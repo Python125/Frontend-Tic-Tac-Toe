@@ -105,7 +105,7 @@ function WalletVerification() {
                     <Text>Signature: {signature}</Text> */}
                 </Box>
             )}
-            {isVerified && <Text>Wallet verified! Your data has been saved.</Text>}
+            {isVerified}
         </Box>
     );
 }
