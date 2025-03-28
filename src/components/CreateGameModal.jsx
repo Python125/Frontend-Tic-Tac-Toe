@@ -14,26 +14,20 @@ function CreateGameModal() {
     const [gameInput, setGameInput] = useState('');
     const [gameAmount, setGameAmount] = useState('');
     const [isDialogOpen, setIsDialogOpen] = useState(false);
-    const { isConnected } = useAccount();
+    const { address } = useAccount();
     const dispatch = useDispatch();
 
     function handleSubmit(e) {
         e.preventDefault();
         if (!gameInput.trim()) return;
 
-        toaster.create({
-            title: 'Game created',
-            description: 'Game created successfully',
-            type: 'success',
-        });
-
         const newGame = {
-            id: games.length + 1,
             name: gameInput,
             maxParticipantCount: 2,
             minBuyInAmount: parseFloat(gameAmount),
             maxBuyInAmount: parseFloat(gameAmount),
             status: 'Active',
+            walletAddress: address
         }
         console.log(newGame);
 
@@ -43,6 +37,18 @@ function CreateGameModal() {
             setGameInput('');
             setGameAmount('');
             setIsDialogOpen(false);
+            toaster.create({
+                title: 'Game created',
+                description: 'Game created successfully',
+                type: 'success',
+            });
+        })
+        .catch(error => {
+            toaster.create({
+                title: 'Error',
+                description: error.response.data.message,
+                type: 'error',
+            });
         });
     }
 
