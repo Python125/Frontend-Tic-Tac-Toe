@@ -1,4 +1,4 @@
-import { StrictMode } from 'react';
+// import { StrictMode } from 'react';
 import { ChakraProvider, defaultSystem } from '@chakra-ui/react';
 import { WagmiProvider } from 'wagmi';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
@@ -15,7 +15,7 @@ import { Toaster } from './components/ui/toaster';
 const queryClient = new QueryClient();
 
 createRoot(document.getElementById('root')).render(
-  <StrictMode>
+  // <StrictMode>
     <ChakraProvider value={defaultSystem}>
       <Provider store={store}>
           <WagmiProvider config={config}>
@@ -34,5 +34,5 @@ createRoot(document.getElementById('root')).render(
           </WagmiProvider>
       </Provider>
     </ChakraProvider>
-  </StrictMode>
+  // </StrictMode>
 )
