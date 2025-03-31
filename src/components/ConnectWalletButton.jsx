@@ -1,15 +1,16 @@
-import { useAccount, useSignMessage, useConnect, useDisconnect, useEnsAvatar } from 'wagmi';
+import { useAccount, useSignMessage, useConnect } from 'wagmi';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useDispatch } from 'react-redux';
 import { setWalletConnection, setWalletNonce, setWalletSignature, setWalletVerification, setWalletError } from '../features/wallet/walletSlice';
-import { Button } from '@chakra-ui/react';
+import { Button, Box } from '@chakra-ui/react';
 
 const apiURL = import.meta.env.VITE_URL;
 console.log(apiURL);
 
 function ConnectWalletButton() {
     const { connectors, connect } = useConnect();
+
     const { address, isConnected } = useAccount();
     const { data: signature, signMessage } = useSignMessage();
     const [nonce, setNonce] = useState('');
@@ -98,17 +99,17 @@ function ConnectWalletButton() {
     };
 
     return (
-        <div>
+        <Box>
             {connectors.map((connector) => (
-                <Button
-                    backgroundColor="white" color="black"
-                    key={connector.id}
-                    onClick={() => connect({ connector })}
-                >
-                    Connect Wallet
-                </Button>
+                <Box key={connector.id}>
+                    <Button
+                        backgroundColor="white" color="black"
+                        onClick={() => connect({ connector })}>
+                        Connect Wallet
+                    </Button>
+                </Box>
             ))}
-        </div>
+        </Box>
     )
 }
 
