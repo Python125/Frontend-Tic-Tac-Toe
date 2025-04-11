@@ -1,10 +1,11 @@
-import { useState, React } from "react";
+import { useState, React, useEffect } from "react";
 import { Input, Button, Dialog, CloseButton } from '@chakra-ui/react';
 import { toaster } from "./ui/toaster";
 import axios from "axios";
 import { useAccount } from "wagmi";
 import { useDispatch } from 'react-redux';
 import { addGame } from '../features/games/gameSlice';
+import { socket } from '../socket';
 
 const apiURL = import.meta.env.VITE_URL;
 // console.log(apiURL);
@@ -32,8 +33,13 @@ function CreateGameModal() {
         console.log(newGame);
 
         axios.post(`${apiURL}/games`, newGame).then(response => {
-            setGames([...games, response.data]);
-            dispatch(addGame(response.data));
+            const createdGame = response.data;
+
+            socket.connect();
+            socket.emit('createGame', createdGame.id);
+
+            setGames([...games, createdGame]);
+            dispatch(addGame(createdGame));
             setGameInput('');
             setGameAmount('');
             setIsDialogOpen(false);
@@ -51,6 +57,18 @@ function CreateGameModal() {
             });
         });
     }
+
+    useEffect(() => {
+        const onGameConfirmed = (data) => {
+          console.log(data);
+        };
+      
+        socket.on(onGameConfirmed);
+      
+        return () => {
+          socket.off(onGameConfirmed);
+        };
+    }, []);
 
     return (
         <>
