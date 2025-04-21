@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { Box, Text, Grid, Button, Link } from '@chakra-ui/react';
 import { toaster } from './ui/toaster';
 import { socket } from '../socket';
@@ -6,23 +6,24 @@ import { socket } from '../socket';
 function TicTacToe() {
     const [board, setBoard] = useState(Array(9).fill(null));
     const [user, setUser] = useState(null);
+    const [gameOver, setGameOver] = useState(false);
 
     const startNewGame = () => {
         const newUser = Math.random() < 0.5 ? "X" : "O";
         setUser(newUser);
 
         socket.connect();
-        socket.emit('startGame', 213);
+        socket.emit('startGame', 223);
     }
 
     const handleClick = (i) => {
         socket.connect();
-        socket.emit('makeMove', 213);
+        socket.emit('makeMove', 223);
 
-        if (board[i] !== null) {
+        if (board[i] !== null || gameOver) {
             toaster.create({
-                title: "Cell already filled",
-                description: "Please choose another cell",
+                title: "Invalid move",
+                description: gameOver ? "Game over" : "Cell already filled",
                 type: "error",
             });
             return;
@@ -37,7 +38,8 @@ function TicTacToe() {
                 title: "You win!",
                 type: "success",
             });
-            socket.emit('gameWon', 213);
+            socket.emit('gameWon', 223);
+            setGameOver(true);
             endGame();
             return;
         } else if (checkDraw(newBoard)) {
@@ -45,7 +47,8 @@ function TicTacToe() {
                 title: "It's a draw.",
                 type: "info",
             });
-            socket.emit('gameDraw', 213);
+            socket.emit('gameDraw', 223);
+            setGameOver(true);
             endGame();
             return;
         }
@@ -70,7 +73,7 @@ function TicTacToe() {
           ];
 
         return winPatterns.some(pattern => { // Checks if any of the patterns "match"
-            return pattern.every(index => boardState[index] === player);
+            return pattern.every(index => boardState[index] === player); // Checks if the player's symbol is in all the cells in the pattern
         });
     }
 
@@ -80,33 +83,22 @@ function TicTacToe() {
 
     const endGame = () => {
         socket.connect();
-        socket.emit('endGame', 213);
+        socket.emit('endGame', 223);
     }
 
     const requestRematch = () => {
         socket.connect();
-        socket.emit('requestRematch', 213);
+        socket.emit('requestRematch', 223);
 
         setBoard(Array(9).fill(null));
         setUser(null);
+        setGameOver(false);
         console.log("Rematch requested");
     }
 
-    // useEffect(() => { // LEAVE COMMENTED OUT FOR NOW
-    //     const onRematchRequested = () => {
-    //         console.log("Rematch requested");
-    //     }
-
-    //     socket.on('rematchRequested', onRematchRequested);
-
-    //     return () => {
-    //         socket.off('rematchRequested', onRematchRequested);
-    //     }
-    // }, []);
-
     const leaveGame = () => {
         socket.connect();
-        socket.emit('leaveGame', 213);
+        socket.emit('leaveGame', 223);
     }
 
     return (
