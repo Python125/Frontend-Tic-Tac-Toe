@@ -16,6 +16,7 @@ function TicTacToe() {
 
     useEffect(() => {
     socket.connect();
+    console.log('Socket connected?', socket.connected);
     socket.emit('joinGame', id);
 
     socket.on('playerAssigned', (role) => {
