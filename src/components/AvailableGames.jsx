@@ -1,6 +1,8 @@
+import { useState, React, useEffect } from "react";
 import { Box, List, Text, Container, Link, Flex } from "@chakra-ui/react";
 import { useAccount } from "wagmi";
 import { useSelector } from 'react-redux';
+import { socket } from '../socket';
 
 // const apiURL = import.meta.env.VITE_URL;
 
@@ -10,6 +12,23 @@ function AvailableGames() {
 
     console.log(games);
 
+    function handleGameJoined(gameId) {
+        socket.connect();
+        socket.emit('joinGame', gameId);
+    }
+
+    useEffect(() => {
+        const onGameJoined = (data) => {
+            console.log(data);
+        }
+
+        socket.on('gameJoined', onGameJoined);
+
+        return () => {
+            socket.off('gameJoined', onGameJoined);
+        }
+    }, []);
+    
     return (
         <Box display='flex' flexDirection="column" justifyContent='center'>
             <List.Root>
@@ -26,7 +45,7 @@ function AvailableGames() {
                                             )}
                                         </Flex>
                                         <Text fontSize='lg' textDecoration='none' marginRight='10px'>{game.maxBuyInAmount} ETH</Text>
-                                        <Link backgroundColor='gray.800' color='white' fontSize='lg' padding='10px' borderRadius='md' _hover={{backgroundColor: 'blue.600'}} href={`/games/${game.id}`}>Accept</Link>
+                                        <Link backgroundColor='gray.800' color='white' fontSize='lg' padding='10px' borderRadius='md' _hover={{backgroundColor: 'blue.600'}} href={`/games/${game.id}`} onClick={() => handleGameJoined(game.id)}>Accept</Link>
                                     </Container>
                                 </Box>
                             ) : (

@@ -100,15 +100,13 @@ function ConnectWalletButton() {
 
     return (
         <Box>
-            {connectors.map((connector) => (
-                <Box key={connector.id}>
-                    <Button
-                        backgroundColor="white" color="black"
-                        onClick={() => connect({ connector })}>
-                        Connect Wallet
-                    </Button>
-                </Box>
-            ))}
+            {connectors.length > 0 && (
+                <Button
+                    backgroundColor="white" color="black"
+                    onClick={() => connect({ connector: connectors[0] })}>
+                    Connect Wallet
+                </Button>
+            )}
         </Box>
     )
 }
