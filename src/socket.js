@@ -11,3 +11,7 @@ export const socket = io(apiURL, {
     transports: ['websocket'],
     withCredentials: true,
 });
+
+socket.on('connect_error', (err) => {
+    console.error('[SOCKET CONNECT ERROR]', err.message);
+});
