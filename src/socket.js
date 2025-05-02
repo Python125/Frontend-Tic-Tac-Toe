@@ -8,4 +8,6 @@ if (import.meta.env.MODE !== 'production') {
 
 export const socket = io(apiURL, {
     autoConnect: false,
+    transports: ['websocket'],
+    withCredentials: true,
 });
