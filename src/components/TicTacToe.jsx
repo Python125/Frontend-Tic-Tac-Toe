@@ -16,56 +16,72 @@ function TicTacToe() {
     const [playerIndex, setPlayerIndex] = useState(null);
 
     useEffect(() => {
-    socket.connect();
-    console.log('Socket connected?', socket.connected);
-    socket.emit('joinGame', id);
+        socket.connect();
+        console.log('Socket connected?', socket.connected);
+        socket.emit('joinGame', id);
 
-    socket.on('playerAssigned', (role) => {
-        console.log('[PLAYER ASSIGNED]', role);
-        setUser(role);
-        setPlayerIndex(role === 'X' ? 0 : 1);
-    });
+        socket.on('playerAssigned', (role) => {
+            console.log('[PLAYER ASSIGNED]', role);
+            setUser(role);
+            setPlayerIndex(role === 'X' ? 0 : 1);
+        });
 
-    socket.on('updateBoard', ({ board, currentTurn }) => {
-        setBoard(board);
-        setCurrentTurn(currentTurn);
-    });
+        socket.on('updateBoard', ({ board, currentTurn }) => {
+            setBoard(board);
+            setCurrentTurn(currentTurn);
+        });
 
-    socket.on('gameOver', ({ winner }) => {
-        setGameOver(true);
-        const isWinner = winner === playerIndex;
-        const result = isWinner ? 'You win!' : 'You lose.';
-        const type = isWinner ? 'success' : 'error';
-        setWinnerMessage(result);
-        toaster.create({ title: result, type });
-    });
+        // socket.on('gameOver', ({ winner }) => {
+        //     setGameOver(true);
+        //     const isWinner = winner === playerIndex;
+        //     const result = isWinner ? 'You win!' : 'You lose.';
+        //     const type = isWinner ? 'success' : 'error';
+        //     setWinnerMessage(result);
+        //     toaster.create({ title: result, type });
+        // });
 
-    socket.on('gameDraw', () => {
-        setGameOver(true);
-        toaster.create({ title: "It's a draw.", type: 'info' });
-    });
+        socket.on('gameDraw', () => {
+            setGameOver(true);
+            toaster.create({ title: "It's a draw.", type: 'info' });
+        });
 
-    // socket.on('rematchRequested', ({ board, currentTurn }) => {
-    //     setBoard(board.flat());
-    //     setGameOver(false);
-    //     setCurrentTurn(currentTurn);
-    //     toaster.create({ title: 'Rematch started', type: 'info' });
-    // });
+        // socket.on('rematchRequested', ({ board, currentTurn }) => {
+        //     setBoard(board.flat());
+        //     setGameOver(false);
+        //     setCurrentTurn(currentTurn);
+        //     toaster.create({ title: 'Rematch started', type: 'info' });
+        // });
 
-    // socket.on('error', ({ message }) => {
-    //   toaster.create({ title: 'Error', description: message, type: 'error' });
-    //   navigate('/games');
-    // });
+        // socket.on('error', ({ message }) => {
+        //   toaster.create({ title: 'Error', description: message, type: 'error' });
+        //   navigate('/games');
+        // });
 
-    return () => {
-        socket.off('playerAssigned');
-        socket.off('updateBoard');
-        socket.off('gameOver');
-        socket.off('gameDraw');
-        // socket.off('rematchRequested');
-        // socket.off('error');
-    };
+        return () => {
+            socket.off('playerAssigned');
+            socket.off('updateBoard');
+            // socket.off('gameOver');
+            socket.off('gameDraw');
+            // socket.off('rematchRequested');
+            // socket.off('error');
+        };
     }, [id]);
+
+    useEffect(() => {
+        if (playerIndex === null) return;
+
+        const handleGameOver = ({ winner }) => {
+            setGameOver(true);
+            const isWinner = winner === playerIndex;
+            const result = isWinner ? 'You win!' : 'You lose.';
+            const type = isWinner ? 'success' : 'error';
+            setWinnerMessage(result);
+            toaster.create({ title: result, type });
+        };
+
+        socket.on('gameOver', handleGameOver);
+        return () => socket.off('gameOver', handleGameOver);
+    }, [playerIndex]);
 
     const handleClick = (row, col) => {
         console.log('[HANDLE CLICK]', { user, currentTurn, board });
