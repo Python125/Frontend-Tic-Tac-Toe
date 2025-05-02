@@ -13,6 +13,7 @@ function TicTacToe() {
     const [gameOver, setGameOver] = useState(false);
     const [currentTurn, setCurrentTurn] = useState(0);
     const [winnerMessage, setWinnerMessage] = useState('');
+    const [playerIndex, setPlayerIndex] = useState(null);
 
     useEffect(() => {
     socket.connect();
@@ -22,6 +23,7 @@ function TicTacToe() {
     socket.on('playerAssigned', (role) => {
         console.log('[PLAYER ASSIGNED]', role);
         setUser(role);
+        setPlayerIndex(role === 'X' ? 0 : 1);
     });
 
     socket.on('updateBoard', ({ board, currentTurn }) => {
@@ -31,7 +33,7 @@ function TicTacToe() {
 
     socket.on('gameOver', ({ winner }) => {
         setGameOver(true);
-        const isWinner = winner === (user === 'X' ? 0 : 1);
+        const isWinner = winner === playerIndex;
         const result = isWinner ? 'You win!' : 'You lose.';
         const type = isWinner ? 'success' : 'error';
         setWinnerMessage(result);
