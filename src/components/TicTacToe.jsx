@@ -62,14 +62,14 @@ function TicTacToe() {
         // socket.off('rematchRequested');
         // socket.off('error');
     };
-    }, [user]);
+    }, [id]);
 
     const handleClick = (row, col) => {
         console.log('[HANDLE CLICK]', { user, currentTurn, board });
         if (board[row][col] !== '' || gameOver) return;
         console.log('Click:', { user, currentTurn, board });
         if ((user === 'X' && currentTurn !== 0) || (user === 'O' && currentTurn !== 1)) {
-            toaster.create({ title: "Not your turn", type: 'warning', containerStyle: { marginTop: '72px' } });
+            toaster.create({ title: "Not your turn", type: 'warning' });
             return;
         }
 
