@@ -21,7 +21,7 @@ createRoot(document.getElementById('root')).render(
           <WagmiProvider config={config}>
             <QueryClientProvider client={queryClient}>
               <BrowserRouter>
-                <div style={{ backgroundColor: 'white', height: '100vh', textAlign: 'center' }}>
+                <div style={{ backgroundColor: '#18181b', minHeight: '100vh', textAlign: 'center' }}>
                   <Toaster />
                   <Routes>
                     <Route path="/" element={<HomePage />} />
