@@ -36,7 +36,7 @@ function GamesPage() {
         )}
       </Box>
 
-      <Box backgroundColor='gray.900' height='100%' color='white'>
+      <Box backgroundColor='gray.900' minHeight='100vh' color='white'>
         <AvailableGames />
       </Box>
     </>
