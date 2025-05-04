@@ -17,10 +17,15 @@ function GamesPage() {
 
   useEffect(() => {
     const fetchGames = async () => {
-      const response = await axios.get(`${apiURL}/games`);
-      const gamesData = Array.isArray(response.data) ? response.data : [];
-      dispatch(setAllGames(gamesData));
-    }
+      try {
+        const response = await axios.get(`${apiURL}/games`);
+        const gamesData = Array.isArray(response.data) ? response.data : [];
+        const activeGames = gamesData.filter(game => game.status !== 'COMPLETED');
+        dispatch(setAllGames(activeGames));
+      } catch (error) {
+        console.error('Error fetching games:', error);
+      }
+    };
     fetchGames();
   }, []);
 
