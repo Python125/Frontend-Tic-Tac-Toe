@@ -41,7 +41,7 @@ function AvailableGames() {
                                         <Flex flex='1' flexDirection='column' justifyContent='flex-start' alignItems='flex-start' marginLeft='5px'>
                                             <Text fontSize='lg' textDecoration='none'>{game.name}</Text>
                                             {game.user && (
-                                                <Text fontSize='sm' textDecoration='none'>{game.user.username}</Text>
+                                                <Text fontSize='sm' textDecoration='none'>{game.user.username.slice(0, 8)}</Text>
                                             )}
                                         </Flex>
                                         <Text fontSize='lg' textDecoration='none' marginRight='10px'>{game.maxBuyInAmount} ETH</Text>

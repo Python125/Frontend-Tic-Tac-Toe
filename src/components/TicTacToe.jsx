@@ -88,12 +88,12 @@ function TicTacToe() {
     console.log('Frontend:', { board, user, currentTurn });
 
     return (
-        <Box display='flex' flexDirection='column' alignItems='center' justifyContent='center' height='35vh' gap={3} marginTop='20px' color='white'>
+        <Box display='flex' flexDirection='column' alignItems='center' justifyContent='center' mt={{ base: 6, md: 10 }} gap={4} w='100%' color='white'>
             {waiting && playerIndex === 0 && (
-                <Text fontWeight='500' marginTop='60px' fontSize='3xl' color='orange.300'>Waiting for opponent to join...</Text>
+                <Text fontWeight='500' fontSize='3xl' color='orange.300'>Waiting for opponent to join...</Text>
             )}
             {winnerMessage && (
-                <Text fontWeight='500' marginTop='60px' fontSize='3xl' color={winnerMessage === 'You win!' ? 'green.500' : 'red.500'}>{winnerMessage}</Text>
+                <Text fontWeight='500' fontSize='3xl' color={winnerMessage === 'You win!' ? 'green.500' : 'red.500'}>{winnerMessage}</Text>
             )}
             <Text fontWeight='500' fontSize='2xl'>User: {user}</Text>
             <Text fontSize='md'>
@@ -106,10 +106,10 @@ function TicTacToe() {
                         <Box
                             key={`${rowIndex}-${colIndex}`}
                             onClick={() => handleClick(rowIndex, colIndex)}
-                            height="100px"
-                            width="100px"
+                            height={{ base: '80px', sm: '100px' }}
+                            width={{ base: '80px', sm: '100px' }}
                             border="white 1px solid"
-                            fontSize="6xl"
+                            fontSize={{ base: '4xl', sm: '5xl', md: '6xl' }}
                             cursor={gameOver || waiting ? 'not-allowed' : 'pointer'}
                             display="flex"
                             alignItems="center"
@@ -124,7 +124,7 @@ function TicTacToe() {
                 )}
             </Grid>
             {gameOver && (
-                <Link backgroundColor='gray.800' color='white' fontSize='lg' padding='10px' borderRadius='md' _hover={{ backgroundColor: 'blue.600' }} onClick={leaveGame} href='/games'>Back to Lobby</Link>
+                <Link backgroundColor='gray.800' color='white' fontSize='lg' px={4} py={2} borderRadius='md' _hover={{ backgroundColor: 'blue.600' }} onClick={leaveGame} href='/games'>Back to Lobby</Link>
             )}
         </Box>
     );
