@@ -116,7 +116,7 @@ function TicTacToe() {
                             justifyContent="center"
                             transition="background-color 0.3s ease"
                             _hover={{ backgroundColor: !waiting && !gameOver ? 'gray.700' : 'inherit' }}
-                            backgroundColor={cell === 'X' ? 'blue.500' : cell === 'O' ? 'red.500' : 'gray.600'}
+                            backgroundColor={cell === 'X' ? 'blue.500' : cell === 'O' ? 'green.500' : 'gray.600'}
                         >
                             {cell}
                         </Box>
