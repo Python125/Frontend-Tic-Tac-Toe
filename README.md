@@ -1,8 +1,3 @@
-# React + Vite
+This project is a full-stack, real-time multiplayer Tic-Tac-Toe game designed to let two users compete in live matches over WebSockets. Players can join or create games, play as "X" or "O," and receive immediate game state updates. Built with React, Chakra UI, Redux Toolkit, and Socket.IO on the frontend, and NestJS with Prisma on the backend, this project emphasizes real-time communication, state synchronization, and clean architecture. The main goal was to implement real-time game logic with WebSockets, practice managing socket events on both client and server, and build a connected UI that responds to live game states.
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
-
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Experience the features of this project directly in the browser by visiting the live demo [here](https://keen-travesseiro-ef5f99.netlify.app/).
