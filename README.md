@@ -1,8 +1,5 @@
-# React + Vite
+This project is a full-stack, real-time multiplayer Tic-Tac-Toe game designed to let two users compete in live matches over WebSockets, with wallet-based player identification via MetaMask. Players can create or join games, are automatically assigned "X" or "O", and receive instant updates as moves are made. Built using React, Chakra UI, Redux Toolkit, and Socket.IO on the frontend, and NestJS with Prisma on the backend, the game emphasizes real-time state synchronization and clean architecture. A MetaMask wallet is required to sign in, create game sessions, and play, enabling a Web3-style identity layer without traditional login systems. The main goal was to build a fully connected game using WebSockets, manage user sessions securely with wallet signatures, and deliver a smooth, turn-based experience in real time.
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+![Game-Session](/src/assets/TicTacToe.png)
 
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Experience the features of this project directly in the browser by visiting the live demo [here](https://keen-travesseiro-ef5f99.netlify.app/).
